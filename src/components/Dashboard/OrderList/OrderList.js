@@ -12,8 +12,17 @@ const OrderList = () => {
     }, [])
 
     const handleStatusChange = (id, status) => {
-        const modifiedStatus = { id, status }
+        let modifiedOrders = [];
+        orders.forEach(order => {
+            if (order._id === id) {
+                order.status = status;
+            }
+            modifiedOrders.push(order)
+        })
+        setOrders(modifiedOrders);
 
+        const modifiedStatus = { id, status }
+        
         axios.patch('https://gerez-server.herokuapp.com/updateOrderStatus', modifiedStatus)
             .then(res => res.data && console.log(res.data, "Successfully Modified"))
             .catch(error => console.log(error));

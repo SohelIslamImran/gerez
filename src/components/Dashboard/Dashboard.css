@@ -85,6 +85,11 @@
   margin-left: 0.3rem;
 }
 
+.link-active {
+  color: black !important;
+  font-weight: 500;
+}
+
 a,
 a:hover,
 a:focus {

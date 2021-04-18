@@ -20,11 +20,15 @@ const DashboardNavbar = ({ setShowSidebar, show }) => {
                     <h2
                         className="d-inline-block ml-md-3 mb-0"
                         style={{ fontSize: "1.4rem", fontWeight: "600" }}>
-                        {panel === "orderList" ? "Order List"
-                            : panel === "addService" ? "Add Service"
-                                : panel === "makeAdmin" ? "Make Admin"
-                                    : panel === "manageServices" ? "Manage Services"
-                                        : ""}
+                        {panel === "profile" ? "Profile"
+                            : panel === "orderList" ? "Order List"
+                                : panel === "addService" ? "Add Service"
+                                    : panel === "makeAdmin" ? "Make Admin"
+                                        : panel === "manageServices" ? "Manage Services"
+                                            : panel === "book" ? "Book"
+                                                : panel === "bookingList" ? "Booking List"
+                                                    : panel === "review" ? "Review"
+                                                        : ""}
                     </h2>
                 </Navbar.Brand>
                 <Navbar.Collapse id="responsive-navbar-nav">

@@ -57,8 +57,7 @@ const NavBar = () => {
                         Reviews
                     </Nav.Link>
                     <Nav.Link
-                        as={Link}
-                        to="/contact"
+                        href="#contact"
                         className="mr-md-5" active>
                         Contact Us
                     </Nav.Link>
