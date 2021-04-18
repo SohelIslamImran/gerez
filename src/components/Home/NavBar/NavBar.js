@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { UserContext } from '../../../App';
 import Logo from '../../../images/logo.svg';
 
 const NavBar = () => {
-    const { isAdmin } = useContext(UserContext);
     const [isSticky, setSticky] = useState(false);
     const [isCollapsed, setCollapsed] = useState(null);
 
@@ -49,14 +47,12 @@ const NavBar = () => {
                 <Nav className="ml-auto">
                     <Nav.Link as={Link} to="/" className="mr-md-5" onClick={() => window.scrollTo(500, 0)} active>Home</Nav.Link>
                     <Nav.Link
-                        as={Link}
-                        to="/services"
+                        href="#services"
                         className="mr-md-5" active>
                         Services
                     </Nav.Link>
                     <Nav.Link
-                        as={Link}
-                        to="/reviews"
+                        href="#reviews"
                         className="mr-md-5" active>
                         Reviews
                     </Nav.Link>
@@ -68,7 +64,7 @@ const NavBar = () => {
                     </Nav.Link>
                     <Nav.Link
                         as={Link}
-                        to={isAdmin ? "/dashboard/orderList" : "/dashboard/book"}
+                        to="/dashboard/profile"
                         className="mr-md-5" active>
                         Dashboard
                     </Nav.Link>

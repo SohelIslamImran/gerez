@@ -70,7 +70,7 @@
   display: block;
 }
 #sidebar ul li a:hover {
-    margin-right: 10px;
+  margin-right: 10px;
   color: black;
   background: #f4f7fc;
 }
@@ -82,7 +82,7 @@
 }
 
 #sidebar ul li a span {
-  margin-left: .3rem;
+  margin-left: 0.3rem;
 }
 
 a,

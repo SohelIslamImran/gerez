@@ -37,8 +37,6 @@ const Book = () => {
             .catch(error => console.log(error));
     };
 
-    console.log(selectedService.title);
-
     return (
         <div>
             { serviceData ?
@@ -72,14 +70,11 @@ const Book = () => {
                             <Form.Group as={Col} md={5} sm={12}>
                                 <Form.Label style={{ fontWeight: "bold" }}>Service</Form.Label>
                                 <Form.Control
-                                    className="shadow-none"
-                                    as="select"
-                                    defaultValue={selectedService.title || services[0]?.title}
-                                    {...register("service", { required: true })}>
-                                    {
-                                        services.map(service => <option value={service.title} key={service._id}>{service.title}</option>)
-                                    }
-                                </Form.Control>
+                                  className="shadow-none"
+                                    type="text"
+                                    defaultValue={selectedService.title}
+                                    {...register("service", { required: true })}
+                                    placeholder="Service" />
                             </Form.Group>
                         </Form.Row>
                     </div>

@@ -18,7 +18,7 @@ const Services = () => {
     }, [])
 
     return (
-        <section className="text-center services-container py-5">
+        <section id="services" className="text-center services-container py-5">
             <h5>What We Do</h5>
             <h1>Services We Provide</h1>
             <Row className="justify-content-center mx-auto mt-md-5 pt-5">

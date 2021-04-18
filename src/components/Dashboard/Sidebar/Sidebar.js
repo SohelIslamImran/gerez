@@ -1,7 +1,6 @@
 import { faCog, faFileMedical, faListUl, faSignOutAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../App';
 import Logo from '../../../images/logo.svg';
@@ -21,6 +20,11 @@ const Sidebar = ({ show }) => {
                 <h2 className="d-inline-block">Gerez</h2>
             </div>
             <ul className="list-unstyled components">
+                <li>
+                    <Link to="/dashboard/profile">
+                        <FontAwesomeIcon icon={faListUl} /> <span>Profile</span>
+                    </Link>
+                </li>
                 {isAdmin ?
                     <>
                         <li>

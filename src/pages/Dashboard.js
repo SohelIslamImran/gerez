@@ -9,6 +9,7 @@ import DashboardNavbar from '../components/Dashboard/DashboardNavbar/DashboardNa
 import MakeAdmin from '../components/Dashboard/MakeAdmin/MakeAdmin';
 import ManageService from '../components/Dashboard/ManageService/ManageService';
 import OrderList from '../components/Dashboard/OrderList/OrderList';
+import Profile from '../components/Dashboard/Profile/Profile';
 import Review from '../components/Dashboard/Review/Review';
 import Sidebar from '../components/Dashboard/Sidebar/Sidebar';
 
@@ -21,14 +22,15 @@ const Dashboard = () => {
             <Sidebar show={showSidebar} />
             <div id="content">
                 <DashboardNavbar setShowSidebar={setShowSidebar} show={showSidebar} />
-                {panel === "orderList" && isAdmin ? <OrderList />
-                    : panel === "addService" && isAdmin ? <AddService />
-                        : panel === "makeAdmin" && isAdmin ? <MakeAdmin />
-                            : panel === "manageServices" && isAdmin ? <ManageService />
-                                : panel === "book" ? <Book />
-                                    : panel === "bookingList" ? <BookingList />
-                                        : panel === "review" ? <Review />
-                                            : null}
+                {panel === "profile" ? <Profile />
+                    : panel === "orderList" && isAdmin ? <OrderList />
+                        : panel === "addService" && isAdmin ? <AddService />
+                            : panel === "makeAdmin" && isAdmin ? <MakeAdmin />
+                                : panel === "manageServices" && isAdmin ? <ManageService />
+                                    : panel === "book" ? <Book />
+                                        : panel === "bookingList" ? <BookingList />
+                                            : panel === "review" ? <Review />
+                                                : null}
             </div>
         </div>
     );
