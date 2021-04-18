@@ -1,0 +1,19 @@
+.modal-content {
+  border-radius: 20px;
+  padding: 1rem 1.5rem;
+}
+
+.modal-header {
+  border-bottom: 0;
+  padding: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 0;
+  }
+  .modal-header {
+    padding-right: 0.8rem !important;
+    padding-top: 0.6rem !important;
+  }
+}

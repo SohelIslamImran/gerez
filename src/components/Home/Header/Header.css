@@ -1,0 +1,60 @@
+.header-container {
+  min-height: 100vh;
+}
+.header-container::after {
+  height: 100vh;
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 68%;
+  background-image: url("../../../images/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -50;
+}
+
+.navbar .nav-link {
+  color: black;
+  font-weight: 500;
+}
+
+.banner {
+  height: 100vh;
+}
+
+.banner h1 {
+  font-size: 3.2rem;
+  color: #3a4256;
+}
+
+.banner .btn {
+  font-size: 1.2rem;
+  background: #fd7e15 !important;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+}
+
+.banner .btn:active,
+.banner .btn:focus,
+.banner .btn:hover {
+  background: #e9710e !important;
+}
+
+.navbar .btn {
+  background: #fd7e15 !important;
+  border-radius: 50px;
+  color: white !important;
+}
+
+.navbar .btn:active,
+.navbar .btn:hover {
+  background: #e9710e !important;
+}
+
+@media (max-width: 768px) {
+  .banner h1 {
+    font-size: 2.5rem;
+    color: #3a4256;
+  }
+}

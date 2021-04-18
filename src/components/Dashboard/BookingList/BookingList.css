@@ -1,0 +1,28 @@
+.booking-list {
+  max-width: 25rem;
+  border-radius: 20px;
+}
+
+.booking-list > div .pending {
+  color: #ff4545;
+  background: #ffe3e3;
+  max-height: 3rem;
+  border-radius: 5px;
+  padding: 0.8rem 2rem;
+}
+
+.booking-list > div .done {
+  color: #009444;
+  background: #c6ffe0;
+  max-height: 3rem;
+  border-radius: 5px;
+  padding: 0.8rem 2rem;
+}
+
+.booking-list > div .on.going {
+  color: #ffc107;
+  background: #ffbb3e4b;
+  max-height: 3rem;
+  border-radius: 5px;
+  padding: 0.8rem 2rem;
+}

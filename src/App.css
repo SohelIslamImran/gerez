@@ -1,0 +1,8 @@
+p {
+  line-height: 2;
+  font-size: 1rem;
+}
+
+.btn {
+  box-shadow: none !important;
+}

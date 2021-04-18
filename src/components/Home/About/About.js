@@ -1,0 +1,31 @@
+import React from 'react';
+import { Button, Col, Container, Image, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import aboutImg from '../../../images/about.png';
+import './About.css';
+
+const About = () => {
+    return (
+        <section className="about-container">
+            <Container fluid>
+                <Row className="align-items-center justify-content-center banner">
+                    <Col md={4} className="p-md-5 order-1 order-md-2">
+                        <h1>We Make Car <br /> Repair Hassle Free</h1>
+                        <p className="text-muted my-4 pr-md-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the</p>
+                        <Button
+                            as={Link}
+                            className="shadow-none border-0"
+                            to="/appointment">
+                            Get Started
+                    </Button>
+                    </Col>
+                    <Col md={6} className="order-2 order-md-1">
+                        <Image src={aboutImg} fluid />
+                    </Col>
+                </Row>
+            </Container>
+        </section>
+    );
+};
+
+export default About;

@@ -1,0 +1,22 @@
+.services-container {
+  background: #f5f5f5;
+}
+
+.services-container h5 {
+  font-weight: 700;
+}
+
+.services-container h1 {
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.services-container > div {
+  width: 70%;
+}
+
+@media (max-width: 768px) {
+  .services-container > div {
+    width: 100%;
+  }
+}
