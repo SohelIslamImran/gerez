@@ -19,4 +19,11 @@
   .services-container > div {
     width: 100%;
   }
+  .services-container h5 {
+    font-weight: 600;
+  }
+  .services-container h1 {
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
 }

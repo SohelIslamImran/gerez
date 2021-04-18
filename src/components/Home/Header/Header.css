@@ -1,5 +1,5 @@
 .header-container {
-  min-height: 100vh;
+  height: 100vh;
 }
 .header-container::after {
   height: 100vh;
@@ -54,7 +54,27 @@
 
 @media (max-width: 768px) {
   .banner h1 {
-    font-size: 2.5rem;
-    color: #3a4256;
+    font-size: 2rem;
+  }
+  .banner p {
+    font-size: 0.9rem;
+  }
+  .banner .btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 50px;
+  }
+  .header-container {
+    height: 500px;
+  }
+  .header-container::after {
+    height: 500px;
+    width: 360px;
+
+    background-size: contain;
+  }
+  .banner {
+    height: 500px;
+    margin-top: 80px;
   }
 }
