@@ -6,7 +6,7 @@ const ManageService = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/services')
+        axios.get('https://gerez-server.herokuapp.com/services')
             .then(res => {
                 setServices(res.data);
             })
@@ -18,7 +18,7 @@ const ManageService = () => {
     const handleDeleteService = id => {
         const removedServices = services.filter(item => item._id !== id);
 
-        axios.delete(`http://localhost:5000/delete/${id}`)
+        axios.delete(`https://gerez-server.herokuapp.com/delete/${id}`)
             .then(res => res.data && setServices(removedServices))
             .catch(error => console.log(error))
     }

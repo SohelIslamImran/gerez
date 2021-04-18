@@ -6,7 +6,7 @@ const OrderList = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/orders')
+        axios.get('https://gerez-server.herokuapp.com/orders')
             .then(res => setOrders(res.data))
             .catch(error => console.log(error))
     }, [])
@@ -14,9 +14,9 @@ const OrderList = () => {
     const handleStatusChange = (id, status) => {
         const modifiedStatus = { id, status }
 
-        axios.patch('http://localhost:5000/updateOrderStatus', modifiedStatus)
-        .then(res => res.data && console.log(res.data , "Successfully Modified"))
-        .catch(error => console.log(error));
+        axios.patch('https://gerez-server.herokuapp.com/updateOrderStatus', modifiedStatus)
+            .then(res => res.data && console.log(res.data, "Successfully Modified"))
+            .catch(error => console.log(error));
     }
 
     return (

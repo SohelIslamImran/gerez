@@ -20,7 +20,7 @@ const AddService = () => {
             return alert('Image is uploading... Please wait!')
         }
 
-        axios.post('http://localhost:5000/addService', serviceInfo)
+        axios.post('https://gerez-server.herokuapp.com/addService', serviceInfo)
             .then(res => res.data && console.log("Successfully Added"))
             .catch(error => console.log(error));
     }

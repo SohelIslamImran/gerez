@@ -9,7 +9,7 @@ const BookingList = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/orders?email=${loggedInUser.email}`)
+        axios.get(`https://gerez-server.herokuapp.com/orders?email=${loggedInUser.email}`)
             .then(res => setOrders(res.data))
             .catch(error => console.log(error))
     }, [loggedInUser.email])

@@ -7,11 +7,11 @@ const MakeAdmin = () => {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = data => {
-        axios.post('http://localhost:5000/addAdmin', data)
-        .then(res => res.data && alert("Successfully Added"))
-        .catch(error => console.log(error));
+        axios.post('https://gerez-server.herokuapp.com/addAdmin', data)
+            .then(res => res.data && alert("Successfully Added"))
+            .catch(error => console.log(error));
     }
-    
+
     return (
         <div>
             <Form onSubmit={handleSubmit(onSubmit)}>

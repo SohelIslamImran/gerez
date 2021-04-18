@@ -10,10 +10,10 @@ const Review = () => {
 
     const onSubmit = data => {
         data.img = loggedInUser.photo || "https://i.ibb.co/5GzXkwq/user.png";
-        
-        axios.post('http://localhost:5000/addReview', data)
-        .then(res => res.data && console.log("Successfully Added"))
-        .catch(error => console.log(error));
+
+        axios.post('https://gerez-server.herokuapp.com/addReview', data)
+            .then(res => res.data && console.log("Successfully Added"))
+            .catch(error => console.log(error));
     }
 
     return (

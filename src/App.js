@@ -18,11 +18,11 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/isAdmin?email=${loggedInUser?.email}`)
+    axios.get(`https://gerez-server.herokuapp.com/isAdmin?email=${loggedInUser?.email}`)
       .then(res => setIsAdmin(res.data))
       .catch(error => console.log(error))
   }, [loggedInUser?.email]);
-  
+
   return (
     <UserContext.Provider value={{ loggedInUser, setLoggedInUser, isAdmin, selectedService, setSelectedService }}>
       <Router>

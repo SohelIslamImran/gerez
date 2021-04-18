@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
-import servicesData from '../../../data/servicesData.js';
 import ServiceDetail from '../ServiceDetail/ServiceDetail';
 import './Services.css';
 
@@ -9,7 +8,7 @@ const Services = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/services')
+        axios.get('https://gerez-server.herokuapp.com/services')
             .then(res => {
                 setServices(res.data);
             })

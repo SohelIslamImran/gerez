@@ -12,7 +12,7 @@ const Book = () => {
     const { register, handleSubmit } = useForm();
 
     useEffect(() => {
-        axios.get('http://localhost:5000/services')
+        axios.get('https://gerez-server.herokuapp.com/services')
             .then(res => setServices(res.data))
             .catch(error => console.log(error))
     }, [])
@@ -32,7 +32,7 @@ const Book = () => {
             orderTime: new Date().toLocaleString()
         };
 
-        axios.post('http://localhost:5000/addOrder', oderDetails)
+        axios.post('https://gerez-server.herokuapp.com/addOrder', oderDetails)
             .then(res => res.data && console.log("Successfully Added"))
             .catch(error => console.log(error));
     };
