@@ -1,5 +1,6 @@
 .testimonials {
   background: aliceblue;
+  height: 800px;
 }
 
 .testimonials > div {
@@ -20,36 +21,20 @@
   margin-bottom: 50px;
 }
 
-.testimonials .owl-stage-outer {
-  padding: 30px 0;
+.swiper-pagination {
+  transform: translateY(10px);
 }
 
-.testimonials .owl-nav {
-  display: none;
-}
-
-.testimonials .owl-dots {
-  text-align: center;
-}
-
-.testimonials .owl-dots span {
-  position: relative;
+.testimonials .swiper-pagination span {
   height: 10px;
   width: 10px;
-  border-radius: 50%;
-  display: block;
   background: #fff;
   border: 2px solid #01b0f8;
   margin: 0 5px;
 }
 
-.testimonials .owl-dots .active {
-  box-shadow: none;
-}
-
-.testimonials .owl-dots .active span {
+.testimonials .swiper-pagination .swiper-pagination-bullet-active {
   background: #01b0f8;
-  box-shadow: none;
   height: 12px;
   width: 12px;
   margin-bottom: -1px;
@@ -62,6 +47,8 @@
   padding: 0 10px;
   border-radius: 20px;
   border: 0;
+  opacity: 0.5;
+  transition: all 0.3s;
 }
 
 .testimonials .card .card-img-top {
@@ -90,31 +77,20 @@
   padding-bottom: 15px;
 }
 
-.testimonials .active {
-  opacity: 0.5;
-  transition: all 0.3s;
+.testimonials .swiper-slide-next .card {
+  opacity: 1 !important;
 }
 
-.testimonials .center {
-  opacity: 1;
-}
-
-.testimonials .center h5 {
+.testimonials .swiper-slide-next h5 {
   font-size: 24px;
 }
 
-.testimonials .center h5 span {
+.testimonials .swiper-slide-next h5 span {
   font-size: 20px;
 }
 
-.testimonials .center .card-img-top {
+.testimonials .swiper-slide-next .card-img-top {
   max-width: 100%;
   height: 120px;
   width: 120px;
-}
-
-.owl-carousel .owl-nav button.owl-next,
-.owl-carousel .owl-nav button.owl-prev,
-.owl-carousel button.owl-dot {
-  outline: 0;
 }
