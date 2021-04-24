@@ -1,6 +1,7 @@
 import React from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import { Link, useParams } from 'react-router-dom';
+import { Container, Navbar } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+import ProfilePopper from '../../Home/ProfilePopper/ProfilePopper';
 
 const DashboardNavbar = ({ setShowSidebar, show }) => {
     const { panel } = useParams();
@@ -32,9 +33,9 @@ const DashboardNavbar = ({ setShowSidebar, show }) => {
                     </h2>
                 </Navbar.Brand>
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="ml-auto">
-                        <Nav.Link as={Link} to="/" className="mr-4" active style={{ fontWeight: "500" }}>Home</Nav.Link>
-                    </Nav>
+                    <div className="ml-auto" >
+                        <ProfilePopper />
+                    </div>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

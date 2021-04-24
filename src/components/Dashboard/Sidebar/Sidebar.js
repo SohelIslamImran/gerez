@@ -69,7 +69,7 @@ const Sidebar = ({ show }) => {
             </ul>
             <ul className="list-unstyled CTAs">
                 <li>
-                    <Link to="/" className="back-home">
+                    <Link to="/" className="back-home text-white">
                         <FontAwesomeIcon icon={faSignOutAlt} /> Back to Home
                     </Link>
                 </li>

@@ -36,7 +36,6 @@
 }
 
 .banner .btn:active,
-.banner .btn:focus,
 .banner .btn:hover {
   background: #e9710e !important;
 }

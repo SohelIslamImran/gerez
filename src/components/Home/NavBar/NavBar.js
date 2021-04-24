@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../../App';
 import Logo from '../../../images/logo.svg';
+import ProfilePopper from '../ProfilePopper/ProfilePopper';
 
 const NavBar = () => {
+    const { loggedInUser } = useContext(UserContext);
     const [isSticky, setSticky] = useState(false);
     const [isCollapsed, setCollapsed] = useState(null);
 
@@ -67,12 +70,18 @@ const NavBar = () => {
                         className="mr-md-5" active>
                         Dashboard
                     </Nav.Link>
-                    <Nav.Link
-                        as={Link}
-                        to="/login"
-                        className="mr-md-5 px-4 btn" active>
-                        Login
-                    </Nav.Link>
+                    {loggedInUser?.isSignedIn ?
+                        <div style={{ marginRight: "5.5rem" }}>
+                            <ProfilePopper />
+                        </div>
+                        :
+                        <Nav.Link
+                            as={Link}
+                            to="/login"
+                            className="mr-md-5 px-4 btn" active>
+                            Login
+                        </Nav.Link>
+                    }
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

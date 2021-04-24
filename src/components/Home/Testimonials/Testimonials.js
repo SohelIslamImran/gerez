@@ -1,10 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { CardDeck } from 'react-bootstrap';
-import SwiperCore, { Pagination, Autoplay } from 'swiper';
+import SwiperCore, { Autoplay, Pagination } from 'swiper';
+import 'swiper/components/pagination/pagination.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss';
-import 'swiper/components/pagination/pagination.scss';
 import Testimonial from '../Testimonial/Testimonial';
 import './Testimonials.css';
 
@@ -23,9 +23,12 @@ const Testimonials = () => {
     }, [])
 
     return (
-        <section id="reviews" className="testimonials p-md-5">
-            <div className="my-5 py-5">
-                <h2>CLIENT TESTIMONIALS</h2>
+        <section id="reviews" className="testimonials p-md-3">
+            <div className="my-5 py-4">
+                <div className="review-title text-center">
+                    <span>What Our Clients Says</span>
+                    <h2>Testimonials</h2>
+                </div>
                 <CardDeck className="mt-5">
                     <Swiper
                         loop={true}
@@ -48,11 +51,8 @@ const Testimonials = () => {
                         autoplay={{
                             delay: 2500,
                             disableOnInteraction: false,
-                          }}
+                        }}
                         spaceBetween={10}
-                        onReachEnd={() => console.log('slide end')}
-                        onSlideChange={() => console.log('slide change')}
-                        onSwiper={(swiper) => console.log(swiper)}
                     >
                         {
                             Reviews.map(testimonial => {

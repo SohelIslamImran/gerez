@@ -8,12 +8,239 @@
   padding: 0 !important;
 }
 
+.modal-body input,
+button {
+  border: none;
+  outline: none;
+  background: none;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+
+.modal-body .cont {
+  overflow: hidden;
+  position: relative;
+  width: 700px;
+  height: 550px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.modal-body .form {
+  position: relative;
+  width: 440px;
+  height: 100%;
+  transition: transform 1.2s ease-in-out;
+  padding: 50px 30px 0;
+}
+
+.modal-body .sub-cont {
+  overflow: hidden;
+  position: absolute;
+  left: 440px;
+  top: 0;
+  width: 700px;
+  height: 100%;
+  padding-left: 260px;
+  background: #fff;
+  transition: transform 1.2s ease-in-out;
+}
+.modal-body .cont.s--signup .sub-cont {
+  transform: translate3d(-440px, 0, 0);
+}
+
+.modal-body button {
+  display: block;
+  margin: 0 auto;
+  width: 260px;
+  height: 36px;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.modal-body .img {
+  overflow: hidden;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 260px;
+  height: 100%;
+  padding-top: 360px;
+}
+.modal-body .img:before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 700px;
+  height: 100%;
+  background-image: url("https://i.ibb.co/9tNyRYk/car-bg.jpg");
+  background-size: cover;
+  transition: transform 1.2s ease-in-out;
+}
+.modal-body .img:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+.modal-body .cont.s--signup .img:before {
+  transform: translate3d(440px, 0, 0);
+}
+.modal-body .img__text {
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  width: 100%;
+  padding: 0 20px;
+  text-align: center;
+  color: #fff;
+  transition: transform 1.2s ease-in-out;
+}
+.modal-body .img__text h2 {
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+.modal-body .img__text p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.modal-body .cont.s--signup .img__text.m--up {
+  transform: translateX(520px);
+}
+.modal-body .img__text.m--in {
+  transform: translateX(-520px);
+}
+.modal-body .cont.s--signup .img__text.m--in {
+  transform: translateX(0);
+}
+.modal-body .img__btn {
+  overflow: hidden;
+  z-index: 2;
+  position: relative;
+  width: 100px;
+  height: 36px;
+  margin: 0 auto;
+  background: transparent;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 15px;
+  cursor: pointer;
+}
+.modal-body .img__btn:after {
+  content: "";
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #fff;
+  border-radius: 30px;
+}
+.modal-body .img__btn span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: transform 1.2s;
+}
+.modal-body .img__btn span.m--in {
+  transform: translateY(-72px);
+}
+.modal-body .cont.s--signup .img__btn span.m--in {
+  transform: translateY(0);
+}
+.modal-body .cont.s--signup .img__btn span.m--up {
+  transform: translateY(72px);
+}
+
+.modal-body h2 {
+  width: 100%;
+  font-size: 26px;
+  text-align: center;
+}
+
+.modal-body label {
+  display: block;
+  width: 260px;
+  margin: 25px auto 0;
+}
+.modal-body label span {
+  font-size: 12px;
+  color: #646363;
+  text-transform: uppercase;
+}
+
+.modal-body input {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.modal-body .forgot-pass {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 12px;
+  color: #777777;
+}
+
+.modal-body .submit {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  background: #fd7e15;
+  text-transform: uppercase;
+}
+
+.modal-body .submit:active,
+.modal-body .submit:hover {
+  background: #e9710e;
+}
+
+.modal-body .fb-btn {
+  border: 2px solid #d3dae9;
+  color: #8fa1c7;
+}
+.modal-body .fb-btn span {
+  font-weight: bold;
+  color: #455a81;
+}
+
+.modal-body .sign-in {
+  transition-timing-function: ease-out;
+}
+.modal-body .cont.s--signup .sign-in {
+  transition-timing-function: ease-in-out;
+  transition-duration: 1.2s;
+  transform: translate3d(440px, 0, 0);
+}
+
+.modal-body .sign-up {
+  transform: translate3d(-700px, 0, 0);
+}
+.modal-body .cont.s--signup .sign-up {
+  transform: translate3d(0, 0, 0);
+}
+
 @media (max-width: 768px) {
   .modal-content {
     padding: 0;
   }
   .modal-header {
-    padding-right: 0.8rem !important;
+    padding-right: 1rem !important;
     padding-top: 0.6rem !important;
   }
 }

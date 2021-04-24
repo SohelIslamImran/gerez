@@ -1,3 +1,16 @@
+.logout-btn {
+  background: #fd7e15 !important;
+  border-radius: 50px;
+  color: white !important;
+  font-weight: 500;
+  border: 0;
+}
+
+.logout-btn:active,
+.logout-btn:hover {
+  background: #e9710e !important;
+}
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -68,17 +81,20 @@
   padding: 10px;
   font-size: 1.1em;
   display: block;
+  transition: 0s;
 }
 #sidebar ul li a:hover {
   margin-right: 10px;
   color: black;
   background: #f4f7fc;
+  transition: 0s;
 }
 
 #sidebar ul li:active,
 #sidebar ul li a:active {
   color: black !important;
   background: #f4f7fc;
+  transition: 0s;
 }
 
 #sidebar ul li a span {
@@ -95,7 +111,6 @@ a:hover,
 a:focus {
   color: inherit;
   text-decoration: none;
-  transition: all 0.3s;
 }
 
 #sidebar ul li.active > a,
@@ -116,17 +131,17 @@ a[data-toggle="collapse"] {
   transform: translateY(-50%);
 }
 
-ul ul a {
+#sidebar ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
   background: #6d7fcc;
 }
 
-ul.CTAs {
+#sidebar ul.CTAs {
   padding: 20px;
 }
 
-ul.CTAs a {
+#sidebar ul.CTAs a {
   text-align: center;
   font-size: 0.9em !important;
   display: block;
@@ -134,19 +149,16 @@ ul.CTAs a {
   margin-bottom: 5px;
 }
 
-a.back-home {
+#sidebar a.back-home {
   color: white !important;
   background: #fd7e15;
 }
-a.back-home:hover {
+#sidebar a.back-home:hover,
+a.back-home:focus,
+a.back-home:active {
+  color: white !important;
   background: #e9710e !important;
   margin-right: 0 !important;
-}
-
-a.article,
-a.article:hover {
-  background: #6d7fcc !important;
-  color: #fff !important;
 }
 
 /* ---------------------------------------------------
