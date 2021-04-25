@@ -1,14 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
+import TableLoader from '../TableLoader/TableLoader';
 
 const ManageService = () => {
     const [services, setServices] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         axios.get('https://gerez-server.herokuapp.com/services')
             .then(res => {
                 setServices(res.data);
+                setLoading(false);
             })
             .catch(error => {
                 console.log(error);
@@ -25,7 +28,8 @@ const ManageService = () => {
 
     return (
         <div className="px-5 pt-4 mx-md-4 mt-5 bg-white" style={{ borderRadius: "15px" }}>
-            <Table hover borderless responsive>
+            {loading ? <TableLoader />
+                : <Table hover borderless responsive>
                 <thead className="bg-light">
                     <tr>
                         <th>Service</th>
@@ -60,7 +64,7 @@ const ManageService = () => {
                         </tbody>
                     )
                 })}
-            </Table>
+            </Table>}
         </div>
     );
 };

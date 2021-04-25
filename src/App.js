@@ -7,6 +7,7 @@ import {
   Switch
 } from "react-router-dom";
 import './App.css';
+import LoadingSpinner from "./components/Home/LoadingSpinner/LoadingSpinner";
 import { getDecodedUser } from "./components/Login/LoginManager";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
@@ -14,11 +15,11 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 
 export const UserContext = createContext();
-const decodedUser = getDecodedUser();
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState(decodedUser);
+  const [loggedInUser, setLoggedInUser] = useState(getDecodedUser());
   const [selectedService, setSelectedService] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -27,13 +28,19 @@ function App() {
       .catch(error => console.log(error))
   }, [loggedInUser?.email]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 3000);
+  }, []);
+
   return (
     <UserContext.Provider value={{ loggedInUser, setLoggedInUser, isAdmin, selectedService, setSelectedService }}>
       <Router>
         <Toaster />
         <Switch>
           <Route exact path="/">
-            <Home />
+            {loading ? <LoadingSpinner /> : <Home />}
           </Route>
           <PrivateRoute path="/dashboard/:panel">
             <Dashboard />
