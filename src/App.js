@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, lazy, Suspense, useEffect, useState } from "react";
 import { Toaster } from 'react-hot-toast';
 import {
   BrowserRouter as Router,
@@ -10,16 +10,15 @@ import './App.css';
 import LoadingSpinner from "./components/Home/LoadingSpinner/LoadingSpinner";
 import { getDecodedUser } from "./components/Login/LoginManager";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import Dashboard from "./pages/Dashboard";
-import Home from './pages/Home';
-import Login from './pages/Login';
+const Home = lazy(() => import('./pages/Home'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Login = lazy(() => import('./pages/Login'));
 
 export const UserContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(getDecodedUser());
   const [selectedService, setSelectedService] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -28,27 +27,23 @@ function App() {
       .catch(error => console.log(error))
   }, [loggedInUser?.email]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 3000);
-  }, []);
-
   return (
     <UserContext.Provider value={{ loggedInUser, setLoggedInUser, isAdmin, selectedService, setSelectedService }}>
       <Router>
         <Toaster />
-        <Switch>
-          <Route exact path="/">
-            {loading ? <LoadingSpinner /> : <Home />}
-          </Route>
-          <PrivateRoute path="/dashboard/:panel">
-            <Dashboard />
-          </PrivateRoute>
-          <Route path="/login">
-            <Login />
-          </Route>
-        </Switch>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <PrivateRoute path="/dashboard/:panel">
+              <Dashboard />
+            </PrivateRoute>
+            <Route path="/login">
+              <Login />
+            </Route>
+          </Switch>
+        </Suspense>
       </Router>
     </UserContext.Provider>
   );

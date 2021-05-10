@@ -42,11 +42,9 @@ const NavBar = () => {
                 <strong>Gerez</strong>
             </Navbar.Brand>
 
-            <Navbar.Toggle onClick={
-                () => setCollapsed(!isCollapsed ? 'show' : null)}
-                aria-controls="responsive-navbar-nav" />
+            <Navbar.Toggle onClick={() => setCollapsed(!isCollapsed ? 'show' : null)} aria-controls="navbar-nav" />
 
-            <Navbar.Collapse id="responsive-navbar-nav" className={isCollapsed}>
+            <Navbar.Collapse id="navbar-nav" className={isCollapsed}>
                 <Nav className="ml-auto">
                     <Nav.Link as={Link} to="/" className="mr-md-5" onClick={() => window.scrollTo(500, 0)} active>Home</Nav.Link>
                     <Nav.Link
