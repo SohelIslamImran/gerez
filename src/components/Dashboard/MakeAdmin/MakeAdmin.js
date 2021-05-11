@@ -1,12 +1,18 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Col, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
+import { UserContext } from '../../../App';
+import swal from 'sweetalert';
 
 const MakeAdmin = () => {
+    const { loggedInUser: {email} } = useContext(UserContext);
     const { register, handleSubmit } = useForm();
 
     const onSubmit = data => {
+        if (email === "test@admin.com") {
+            return swal("Permission restriction!", "As a test-admin, you don't have this permission.", "info");            ;
+        }
         axios.post('https://gerez-server.herokuapp.com/addAdmin', data)
             .then(res => res.data && alert("Successfully Added"))
             .catch(error => console.log(error));

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { useHistory, useLocation } from 'react-router-dom';
 import { UserContext } from '../../App';
 import {
@@ -97,11 +97,11 @@ const Login = () => {
                         <form onSubmit={handleSignIn(onSubmit)}>
                             <label>
                                 <span>Email</span>
-                                <input {...registerSignIn("email", { required: true })} type="email" />
+                                <input defaultValue="test@admin.com" {...registerSignIn("email", { required: true })} type="email" />
                             </label>
                             <label>
                                 <span>Password</span>
-                                <input {...registerSignIn("password", { required: true })} type="password" />
+                                <input defaultValue="123456" {...registerSignIn("password", { required: true })} type="password" />
                             </label>
                             <p className="forgot-pass">Forgot password?</p>
                             <button type="submit" className="submit">Sign In</button>

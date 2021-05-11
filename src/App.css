@@ -6,3 +6,12 @@ p {
 .btn {
   box-shadow: none !important;
 }
+
+.toast {
+  z-index: 9999;
+  position: absolute;
+  top: 22rem;
+  left: 10rem;
+  right: 0;
+  background-color: white;
+}

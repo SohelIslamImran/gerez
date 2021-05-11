@@ -26,6 +26,7 @@
     "react-hot-toast": "^1.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "sweetalert": "^2.1.2",
     "swiper": "^6.5.7",
     "web-vitals": "^1.0.1"
   },

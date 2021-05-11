@@ -1,9 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
+import swal from 'sweetalert';
+import { UserContext } from '../../../App';
 import TableLoader from '../TableLoader/TableLoader';
 
 const ManageService = () => {
+    const { loggedInUser: {email} } = useContext(UserContext);
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -19,6 +22,9 @@ const ManageService = () => {
     }, [])
 
     const handleDeleteService = id => {
+        if (email === "test@admin.com") {
+            return swal("Permission restriction!", "As a test-admin, you don't have this permission.", "info");            ;
+        }
         const removedServices = services.filter(item => item._id !== id);
 
         axios.delete(`https://gerez-server.herokuapp.com/delete/${id}`)
