@@ -1,42 +1,54 @@
+import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Col, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
+import swal from 'sweetalert';
+import './AddService.css';
 
 const AddService = () => {
     const { register, handleSubmit } = useForm();
-    const [imageURL, setImageURL] = useState("");
 
-    const onSubmit = data => {
+    const onSubmit = async data => {
+        const loading = toast.loading('Uploading...Please wait!');
+        const imageData = new FormData();
+        imageData.set('key', '08d5da1c81cc5c52012f0b930505d031');
+        imageData.append('image', data.image[0]);
+
+        let imageURL = "";
+        try {
+            const res = await axios.post('https://api.imgbb.com/1/upload', imageData);
+            imageURL = res.data.data.display_url;
+        } catch (error) {
+            toast.dismiss(loading);
+            return toast.error('Failed to upload the image!');
+        }
+
         const serviceInfo = {
             title: data.title,
             description: data.description,
             price: data.price,
             image: imageURL
         }
-        console.log(serviceInfo);
-
-        if (!imageURL && data.description && data.title) {
-            return alert('Image is uploading... Please wait!')
-        }
 
         axios.post('https://gerez-server.herokuapp.com/addService', serviceInfo)
-            .then(res => res.data && console.log("Successfully Added"))
-            .catch(error => console.log(error));
-    }
-
-    const handleImageUpload = event => {
-        const imageData = new FormData();
-        imageData.set('key', '08d5da1c81cc5c52012f0b930505d031');
-        imageData.append('image', event.target.files[0]);
-
-        axios.post('https://api.imgbb.com/1/upload', imageData)
-            .then(res => setImageURL(res.data.data.display_url))
-            .catch(error => console.log(error));
+            .then(res => {
+                toast.dismiss(loading);
+                if (res.data) {
+                    return swal("Successfully Uploaded", "Your new service has been successfully added.", "success");
+                }
+                swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
+            })
+            .catch(error => {
+                toast.dismiss(loading);
+                swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
+            });
     }
 
     return (
-        <div>
+        <section className="add-service">
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <div className="p-5 mx-md-5 mt-5 bg-white" style={{ borderRadius: "15px", maxWidth: '85rem' }}>
                     <Form.Row>
@@ -58,24 +70,23 @@ const AddService = () => {
                                 {...register("price", { required: true })}
                                 placeholder="Enter Price" />
                         </Form.Group>
-                        <Form.Group as={Col} md={5} sm={12} className="mr-md-5">
+                        <Form.Group as={Col} md={5} sm={12} className="mr-md-5 mt-md-3">
                             <Form.Label style={{ fontWeight: "bold" }}>Description</Form.Label>
                             <Form.Control className="shadow-none"
-                                style={{ height: "8rem" }}
+                                style={{ height: "10rem" }}
                                 type="text"
                                 as="textarea"
                                 {...register("description", { required: true })}
                                 placeholder="Enter Description" />
                         </Form.Group>
-                        <Form.Group as={Col} md={5} sm={12}>
+                        <Form.Group as={Col} md={5} sm={12} className="mt-md-3">
                             <Form.Label style={{ fontWeight: "bold" }}>Add Image</Form.Label>
                             <Button
                                 as={"label"}
                                 htmlFor="upload"
                                 variant="outline-primary"
-                                className="d-block px-2 upload-btn"
-                                style={{ maxWidth: "220px" }}>
-                                Upload Image
+                                className="d-block p-2 upload-btn">
+                                <FontAwesomeIcon icon={faCloudUploadAlt} className="mr-2" />Upload Image
                             </Button>
                             <Form.Control
                                 hidden="hidden"
@@ -83,18 +94,17 @@ const AddService = () => {
                                 name="photo"
                                 type="file"
                                 {...register("image", { required: true })}
-                                onChange={handleImageUpload}
                                 placeholder="Upload photo" />
                         </Form.Group>
                     </Form.Row>
                 </div>
-                <div className="text-right mt-4" style={{ marginRight: "12rem" }}>
-                    <Button type="submit" className="shadow-none">
+                <div className="text-right mt-4" style={{ marginRight: "11rem" }}>
+                    <Button type="submit" className="submit-btn btn-main">
                         Submit
                     </Button>
                 </div>
             </Form>
-        </div>
+        </section>
     );
 };
 

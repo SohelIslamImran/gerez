@@ -76,7 +76,7 @@ const NavBar = () => {
                         <Nav.Link
                             as={Link}
                             to="/login"
-                            className="mr-md-5 px-4 btn" active>
+                            className="mr-md-5 px-4 btn btn-main" active>
                             Login
                         </Nav.Link>
                     }

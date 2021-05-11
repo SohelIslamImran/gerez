@@ -25,7 +25,7 @@ const ServicePricing = () => {
     }, [])
 
     return (
-        <div className="pricing-section">
+        <div className="pricing-section" id="pricing">
             <Container className="my-md-5">
                 <Col xs={12}>
                     <div className="pricing-title text-center">

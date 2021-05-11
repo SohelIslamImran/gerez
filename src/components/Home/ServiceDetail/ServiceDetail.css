@@ -1,3 +1,7 @@
+.service-detail {
+  transition: all 0.3s;
+}
+
 .service-detail .card {
   border-radius: 20px;
   transition: 0.4s ease-out;
@@ -8,6 +12,10 @@
 .service-detail .card:hover {
   box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.1);
   transform: translateY(-20px);
+}
+
+.service-detail .card img {
+  transition: 0.3s;
 }
 
 .service-detail .card:hover img {
@@ -34,9 +42,17 @@
   transform-origin: bottom;
 }
 
+.service-detail .card-body .card-title {
+  transition: 0.3s;
+}
+
 .service-detail .card:hover .card-body .card-title {
   margin-bottom: 3px !important;
   margin-top: 12px !important;
+}
+
+.service-detail .card-body > div {
+  transition: 0.3s;
 }
 
 .service-detail .card:hover .card-body > div {
@@ -48,20 +64,13 @@
   color: #ed5217;
   font-weight: 700;
   font-size: 1.4rem;
+  transition: 0.3s;
 }
 
 .service-detail .card .card-body > div > .btn {
   font-size: 1rem;
-  background: #fd7e15 !important;
   padding: 0.7rem 2rem;
   border-radius: 50px;
-  border: none;
-}
-
-.service-detail .card .card-body > div > .btn:active,
-.service-detail .card .card-body > div > .btn:hover,
-.service-detail .card .card-body > div > .btn:focus {
-  background: #e9710e !important;
 }
 
 .service-detail .card .card-body > div {

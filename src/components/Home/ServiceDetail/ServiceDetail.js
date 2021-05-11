@@ -19,6 +19,7 @@ const ServiceDetail = ({ service }) => {
                     <div>
                         <p>${price}</p>
                         <Button
+                            className="btn-main"
                             as={Link}
                             to={isAdmin ? "/dashboard/orderList" : "/dashboard/book"}
                             onClick={() => setSelectedService(service)}>

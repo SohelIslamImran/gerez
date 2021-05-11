@@ -36,7 +36,7 @@ const Contact = () => {
                         </div>
                     </Col>
                     <Col xs={12}>
-                        <div className="btn-lrg submit-btn">Send Message</div>
+                        <div className="btn-lrg submit-btn btn-main">Send Message</div>
                     </Col>
                 </Row>
             </Container>

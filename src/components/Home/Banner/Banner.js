@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Col, Container, Image, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import bannerImg from '../../../images/banner-img.png';
 
 const Banner = () => {
@@ -12,7 +11,7 @@ const Banner = () => {
                     <p className="text-muted my-4 pr-md-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the</p>
                     <Button
                         as={"a"}
-                        className="shadow-none border-0"
+                        className="shadow-none btn-main"
                         href="#services">
                         Get Started
                     </Button>

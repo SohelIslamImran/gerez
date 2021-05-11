@@ -15,3 +15,17 @@ p {
   right: 0;
   background-color: white;
 }
+
+.btn-main {
+  background: #fd7709 !important;
+  color: white !important;
+  border: none !important;
+}
+
+.btn-main:hover {
+  background: #e9710e !important;
+}
+
+.btn-main:active {
+  background: #da6a0e !important;
+}

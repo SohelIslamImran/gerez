@@ -10,6 +10,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@stripe/react-stripe-js": "^1.4.0",
     "@stripe/stripe-js": "^1.13.2",
+    "@sweetalert/with-react": "^0.1.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",

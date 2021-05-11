@@ -337,6 +337,7 @@
 .back-to-top {
   position: relative;
   z-index: 2;
+  transition: 0.3s;
 }
 .back-to-top .btn-dark {
   width: 35px;

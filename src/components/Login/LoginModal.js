@@ -1,12 +1,14 @@
+import swal from '@sweetalert/with-react';
 import React, { useContext, useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useHistory, useLocation } from 'react-router-dom';
 import { UserContext } from '../../App';
 import {
     createUserWithEmailAndPassword,
     handleGoogleSignIn,
+    handleSignOut,
     initializeLoginFramework,
     setJWTToken,
     signInWithEmailAndPassword
@@ -31,12 +33,8 @@ const Login = () => {
         const loading = toast.loading('Please wait...');
         handleGoogleSignIn()
             .then(res => {
-                setLoggedInUser(res);
                 toast.dismiss(loading);
-                toast.success('Successfully Signed In!');
-                setJWTToken();
-                setShowModal(false);
-                history.replace(from);
+                handleResponse(res);
             }).catch(err => {
                 toast.dismiss(loading);
                 toast.error(err.message)
@@ -52,12 +50,8 @@ const Login = () => {
             createUserWithEmailAndPassword(name, email, password)
                 .then(res => {
                     res.name = name;
-                    setLoggedInUser(res);
-                    setJWTToken();
                     toast.dismiss(loading);
-                    toast.success('Successfully Signed Up!');
-                    setShowModal(false);
-                    history.replace(from);
+                    handleResponse(res);
                 }).catch(err => {
                     toast.dismiss(loading);
                     toast.error(err.message)
@@ -67,15 +61,43 @@ const Login = () => {
         if (!newUser && email && password) {
             signInWithEmailAndPassword(email, password)
                 .then(res => {
-                    setLoggedInUser(res);
-                    setJWTToken();
                     toast.dismiss(loading);
-                    toast.success('Successfully Signed In!');
-                    setShowModal(false);
-                    history.replace(from);
+                    handleResponse(res);
                 }).catch(err => {
                     toast.dismiss(loading);
                     toast.error(err.message)
+                });
+        }
+    }
+
+    const handleResponse = (res) => {
+        setLoggedInUser(res);
+        setJWTToken();
+        setShowModal(false);
+        history.replace(from);
+        toast.success('Successfully LoggedIn!');
+        if (res.email === "test@admin.com") {
+            swal({
+                title: "Warning!",
+                content: (
+                    <p>
+                        You have entered the admin panel for testing.
+                        <br />
+                        <b>Please do not abuse this facility!</b>
+                    </p>
+                ),
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then(ok => {
+                    if (!ok) {
+                        handleSignOut()
+                            .then(res => {
+                                setLoggedInUser(res)
+                                toast.error('Logged Out!');
+                            })
+                    }
                 });
         }
     }

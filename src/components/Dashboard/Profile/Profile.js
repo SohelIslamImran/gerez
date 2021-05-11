@@ -28,7 +28,7 @@ const Profile = () => {
                             <h4>{name}</h4>
                             <p className="text-secondary mb-1">{email}</p>
                         </div>
-                        <Button onClick={signOut} className="px-4 logout-btn">Logout</Button>
+                        <Button onClick={signOut} className="px-4 logout-btn btn-main">Logout</Button>
                     </div>
                 </Card.Body>
             </Card>

@@ -14,6 +14,10 @@
   z-index: -50;
 }
 
+.navbar {
+  transition: all 0.3s;
+}
+
 .navbar .nav-link {
   color: black;
   font-weight: 500;
@@ -30,26 +34,14 @@
 
 .banner .btn {
   font-size: 1.2rem;
-  background: #fd7e15 !important;
   padding: 0.8rem 2rem;
   border-radius: 50px;
 }
 
-.banner .btn:active,
-.banner .btn:hover {
-  background: #e9710e !important;
-}
-
 .navbar .btn {
-  background: #fd7e15 !important;
   border-radius: 50px;
-  color: white !important;
 }
 
-.navbar .btn:active,
-.navbar .btn:hover {
-  background: #e9710e !important;
-}
 
 @media (max-width: 768px) {
   .banner h1 {

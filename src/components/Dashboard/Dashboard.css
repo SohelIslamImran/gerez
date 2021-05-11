@@ -1,14 +1,6 @@
 .logout-btn {
-  background: #fd7e15 !important;
   border-radius: 50px;
-  color: white !important;
   font-weight: 500;
-  border: 0;
-}
-
-.logout-btn:active,
-.logout-btn:hover {
-  background: #e9710e !important;
 }
 
 /* ---------------------------------------------------
@@ -41,6 +33,9 @@
 #sidebar {
   min-width: 300px;
   max-width: 300px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
   background: white;
   color: #878787;
   transition: all 0.6s cubic-bezier(0.945, 0.02, 0.27, 0.665);
@@ -149,15 +144,10 @@ a[data-toggle="collapse"] {
   margin-bottom: 5px;
 }
 
-#sidebar a.back-home {
-  color: white !important;
-  background: #fd7e15;
-}
 #sidebar a.back-home:hover,
 a.back-home:focus,
 a.back-home:active {
   color: white !important;
-  background: #e9710e !important;
   margin-right: 0 !important;
 }
 
