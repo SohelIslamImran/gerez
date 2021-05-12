@@ -22,13 +22,12 @@ const MakeAdmin = () => {
     return (
         <section className="make-admin">
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <div className="p-5 mx-md-5 mt-5 bg-white d-flex justify-content-center">
+                <div className="p-5 mx-md-5 mt-5 bg-white form-main d-flex justify-content-center">
                     <div>
                         <Form.Label>Email</Form.Label>
                         <Form.Row>
                             <Form.Group as={Col} xs="auto" style={{ width: '25rem' }} >
                                 <Form.Control
-                                    className="shadow-none"
                                     type="text"
                                     {...register("email", { required: true })}
                                     placeholder="Email Address" />

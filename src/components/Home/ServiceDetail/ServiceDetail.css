@@ -15,7 +15,7 @@
 }
 
 .service-detail .card img {
-  transition: 0.3s;
+  transition: all 0.3s;
 }
 
 .service-detail .card:hover img {
@@ -43,7 +43,7 @@
 }
 
 .service-detail .card-body .card-title {
-  transition: 0.3s;
+  transition: all 0.3s;
 }
 
 .service-detail .card:hover .card-body .card-title {
@@ -51,11 +51,8 @@
   margin-top: 12px !important;
 }
 
-.service-detail .card-body > div {
-  transition: 0.3s;
-}
-
 .service-detail .card:hover .card-body > div {
+  display: block;
   opacity: 1;
 }
 
@@ -64,7 +61,7 @@
   color: #ed5217;
   font-weight: 700;
   font-size: 1.4rem;
-  transition: 0.3s;
+  transition: all 0.3s;
 }
 
 .service-detail .card .card-body > div > .btn {
@@ -74,18 +71,17 @@
 }
 
 .service-detail .card .card-body > div {
+  display: none;
   position: relative;
   z-index: 3;
   opacity: 0;
   bottom: 16px;
   color: white;
-  opacity: 0;
-  transition: opacity 0.5s;
+  transition: all 0.5s ease-in-out;
 }
 
-
 @media (max-width: 768px) {
-    .service-detail .card {
-        max-height: 24rem;
-      }
+  .service-detail .card {
+    max-height: 24rem;
   }
+}

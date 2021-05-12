@@ -1,90 +1,81 @@
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Col, Form } from 'react-bootstrap';
-import { useForm } from "react-hook-form";
+import { Col, Container, Row } from 'react-bootstrap';
+import toast from 'react-hot-toast';
+import Select from 'react-select';
 import { UserContext } from '../../../App';
-import Payment from '../Payment/Payment';
+import PaymentForm from '../Payment/PaymentForm';
 
 const Book = () => {
-    const { loggedInUser, selectedService } = useContext(UserContext);
+    const { selectedService: { title, price } } = useContext(UserContext);
+    
+    const stripePromise = loadStripe('pk_test_51Ie33uCljQ1lWJFNhmzcstvqqVDr07o9lhLNTrHtGtIqZ2XVyaT1PdijIb0nX2Wyj6RNJ56ipbI7AKhGG6DPRYsv003m5nQO7F');
     const [services, setServices] = useState([]);
-    const [serviceData, setServiceData] = useState(null);
-    const { register, handleSubmit } = useForm();
+
+    const options = services.map(service => ({ value: service.title, label: service.title, price: service.price }));
+    const defaultOption = title ? { value: title, label: title, price: price } : options[0] || { value: "Engine Repair", label: "Engine Repair", price: 25 };
+
+    const [selectedOption, setSelectedOption] = useState(defaultOption);
+    const serviceInfo = services.find(service => service.title === selectedOption.value);
 
     useEffect(() => {
         axios.get('https://gerez-server.herokuapp.com/services')
             .then(res => setServices(res.data))
-            .catch(error => console.log(error))
+            .catch(error => toast.error(error.message))
     }, [])
 
-    const onSubmit = data => {
-        const serviceInfo = services.find(service => service.title === data.service);
-        delete serviceInfo._id
-        data.payWith = "Credit Card";
-        data.status = "Pending";
-        setServiceData({ ...data, ...serviceInfo });
-    }
-
-    const handlePayment = paymentId => {
-        const oderDetails = {
-            ...serviceData,
-            paymentId,
-            orderTime: new Date().toLocaleString()
-        };
-
-        axios.post('https://gerez-server.herokuapp.com/addOrder', oderDetails)
-            .then(res => res.data && console.log("Successfully Added"))
-            .catch(error => console.log(error));
+    const colourStyles = {
+        control: styles => (
+            {
+                ...styles,
+                backgroundColor: 'white',
+                boxShadow: 'none',
+                border: "2px solid #ced4da",
+                '&:hover': { border: '2px solid #fd7e15' },
+                height: "calc(2em + 0.75rem + 2px)"
+            }
+        ),
+        option: (styles, { isDisabled, isFocused, isSelected }) => {
+            return {
+                ...styles,
+                backgroundColor: isDisabled ? null : isSelected ? "#fd7709" : isFocused ? "#fd770928" : null,
+                color: isDisabled ? null : isSelected ? "white" : isFocused ? "black" : "black",
+                cursor: isDisabled ? 'not-allowed' : 'default',
+                ':active': { ...styles[':active'], backgroundColor: !isDisabled && (isSelected ? "#fd7709" : "#fd770948") },
+            };
+        },
     };
 
     return (
-        <div>
-            { serviceData ?
-                <div className="ml-md-5 mt-5 pl-md-5 pt-5">
-                    <p style={{ fontWeight: 'bold' }}>Your Service charged will be ${selectedService.price || serviceData.price}</p>
-                    <h4>Pay with Credit Card</h4>
-                    <Payment handlePayment={handlePayment} />
+        <section>
+            <Container className="p-5 mx-md-5 mt-5 bg-white" style={{ borderRadius: "15px" }}>
+                <Row>
+                    <Col md={6} xs={12} className="pr-md-4">
+                        <label style={{ fontWeight: "bold" }}>Service</label>
+                        <Select
+                            onChange={option => setSelectedOption(option)}
+                            defaultValue={defaultOption}
+                            options={options}
+                            styles={colourStyles}
+                        />
+                    </Col>
+                    <Col md={6} xs={12} className="pl-md-4 form-main">
+                        <label style={{ fontWeight: "bold" }}>Price</label>
+                        <div className="form-control w-50 pl-3" style={{ lineHeight: "2", fontWeight: "500" }}>
+                            ${price || selectedOption.price}
+                        </div>
+                    </Col>
+                </Row>
+
+                <div className="mt-5">
+                    <Elements stripe={stripePromise}>
+                        <PaymentForm serviceInfo={serviceInfo} />
+                    </Elements>
                 </div>
-                :
-                <Form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="p-5 mx-md-5 mt-5 bg-white" style={{ borderRadius: "15px", maxWidth: '85rem' }}>
-                        <Form.Row>
-                            <Form.Group as={Col} md={5} sm={12} className="mr-md-5">
-                                <Form.Label style={{ fontWeight: "bold" }}>Your Name</Form.Label>
-                                <Form.Control
-                                    className="shadow-none"
-                                    type="text"
-                                    defaultValue={loggedInUser.name}
-                                    {...register("name", { required: true })}
-                                    placeholder="Your Name" />
-                            </Form.Group>
-                            <Form.Group as={Col} md={5} sm={12}>
-                                <Form.Label style={{ fontWeight: "bold" }}>Email</Form.Label>
-                                <Form.Control
-                                    className="shadow-none"
-                                    type="text"
-                                    defaultValue={loggedInUser.email}
-                                    {...register("email", { required: true })}
-                                    placeholder="Email Address" />
-                            </Form.Group>
-                            <Form.Group as={Col} md={5} sm={12}>
-                                <Form.Label style={{ fontWeight: "bold" }}>Service</Form.Label>
-                                <Form.Control
-                                  className="shadow-none"
-                                    type="text"
-                                    defaultValue={selectedService.title}
-                                    {...register("service", { required: true })}
-                                    placeholder="Service" />
-                            </Form.Group>
-                        </Form.Row>
-                    </div>
-                    <div className="text-right mt-4" style={{ marginRight: "12rem" }}>
-                        <Button type="submit" className="shadow-none px-4 py-2">
-                            Check out
-                        </Button>
-                    </div>
-                </Form>}
-        </div>
+            </Container>
+        </section>
     );
 };
 

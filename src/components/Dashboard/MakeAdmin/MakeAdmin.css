@@ -8,15 +8,6 @@
   text-align: center;
 }
 
-.make-admin .form-control {
-  border: 2px solid #ced4da;
-  height: calc(2em + 0.75rem + 2px);
-}
-
-.make-admin .form-control:focus {
-  border: 2px solid #fd7e15;
-}
-
 .make-admin .btn {
   padding: 0.65rem 2rem;
   margin-left: 1rem;

@@ -1,12 +1,3 @@
-.add-service .form-control {
-  border: 2px solid #ced4da;
-  height: calc(2em + 0.75rem + 2px);
-}
-
-.add-service .form-control:focus {
-  border: 2px solid #fd7e15;
-}
-
 .add-service .upload-btn {
   border: 2px solid #f8c59a;
   color: #fd7e15;

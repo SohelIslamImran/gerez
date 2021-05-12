@@ -50,12 +50,11 @@ const AddService = () => {
     return (
         <section className="add-service">
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <div className="p-5 mx-md-5 mt-5 bg-white" style={{ borderRadius: "15px", maxWidth: '85rem' }}>
+                <div className="p-5 mx-md-5 mt-5 bg-white form-main" style={{ borderRadius: "15px", maxWidth: '85rem' }}>
                     <Form.Row>
                         <Form.Group as={Col} md={5} sm={12} className="mr-md-5">
                             <Form.Label style={{ fontWeight: "bold" }}>Service Title</Form.Label>
                             <Form.Control
-                                className="shadow-none"
                                 type="text"
                                 {...register("title", { required: true })}
                                 placeholder="Enter Title" />
@@ -63,7 +62,6 @@ const AddService = () => {
                         <Form.Group as={Col} md={5} sm={12}>
                             <Form.Label style={{ fontWeight: "bold" }}>Price</Form.Label>
                             <Form.Control
-                                className="shadow-none"
                                 style={{ maxWidth: "260px" }}
                                 name="price"
                                 type="text"
@@ -72,7 +70,7 @@ const AddService = () => {
                         </Form.Group>
                         <Form.Group as={Col} md={5} sm={12} className="mr-md-5 mt-md-3">
                             <Form.Label style={{ fontWeight: "bold" }}>Description</Form.Label>
-                            <Form.Control className="shadow-none"
+                            <Form.Control
                                 style={{ height: "10rem" }}
                                 type="text"
                                 as="textarea"

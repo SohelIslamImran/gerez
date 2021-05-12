@@ -20,6 +20,7 @@ p {
   background: #fd7709 !important;
   color: white !important;
   border: none !important;
+  border-radius: 50px;
 }
 
 .btn-main:hover {
@@ -28,4 +29,14 @@ p {
 
 .btn-main:active {
   background: #da6a0e !important;
+}
+
+.form-main .form-control {
+  border: 2px solid #ced4da;
+  height: calc(2em + 0.75rem + 2px);
+  box-shadow: none;
+}
+
+.form-main .form-control:focus {
+  border: 2px solid #fd7e15;
 }
