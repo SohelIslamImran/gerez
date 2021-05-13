@@ -1,28 +1,43 @@
-.services-container {
+#services {
   background: #f5f5f5;
 }
 
-.services-container h5 {
-  font-weight: 700;
+#services h5 {
+  color: #ed5217;
+  font-weight: 500;
 }
 
-.services-container h1 {
-  font-weight: 700;
+#services h1 {
+  font-weight: 600;
   margin-top: 1rem;
+  position: relative;
 }
 
-.services-container > div {
+#services h1::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  width: 6rem;
+  height: 3px;
+  background: #ed5217;
+  border-radius: 20px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+#services > div {
   width: 70%;
 }
 
 @media (max-width: 768px) {
-  .services-container > div {
+  #services > div {
     width: 100%;
   }
-  .services-container h5 {
+  #services h5 {
     font-weight: 600;
   }
-  .services-container h1 {
+  #services h1 {
     font-weight: 700;
     font-size: 1.5rem;
   }

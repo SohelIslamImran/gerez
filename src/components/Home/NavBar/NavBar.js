@@ -6,7 +6,7 @@ import Logo from '../../../images/logo.svg';
 import ProfilePopper from '../ProfilePopper/ProfilePopper';
 
 const NavBar = () => {
-    const { loggedInUser } = useContext(UserContext);
+    const { loggedInUser: { isSignedIn } } = useContext(UserContext);
     const [isSticky, setSticky] = useState(false);
     const [isCollapsed, setCollapsed] = useState(null);
 
@@ -68,7 +68,7 @@ const NavBar = () => {
                         className="mr-md-5" active>
                         Dashboard
                     </Nav.Link>
-                    {loggedInUser?.isSignedIn ?
+                    {isSignedIn ?
                         <div style={{ marginRight: "5.5rem" }}>
                             <ProfilePopper />
                         </div>

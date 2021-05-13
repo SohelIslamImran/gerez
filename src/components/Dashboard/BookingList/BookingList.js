@@ -1,23 +1,24 @@
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
+import toast from 'react-hot-toast';
 import { UserContext } from '../../../App';
 import BookListLoader from '../BookListLoader/BookListLoader';
 import './BookingList.css';
 
 const BookingList = () => {
-    const { loggedInUser } = useContext(UserContext);
+    const { loggedInUser: { email } } = useContext(UserContext);
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`https://gerez-server.herokuapp.com/orders?email=${loggedInUser.email}`)
+        axios.get(`https://gerez-server.herokuapp.com/orders?email=${email}`)
             .then(res => {
                 setOrders(res.data);
                 setLoading(false);
             })
-            .catch(error => console.log(error))
-    }, [loggedInUser.email])
+            .catch(error => toast.error(error.message))
+    }, [email])
 
     return (
         <>

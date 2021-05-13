@@ -75,7 +75,7 @@ const Login = () => {
         setJWTToken();
         setShowModal(false);
         history.replace(from);
-        toast.success('Successfully LoggedIn!');
+        toast.success('Successfully Logged In!');
         if (res.email === "test@admin.com") {
             swal({
                 title: "Warning!",
@@ -89,16 +89,15 @@ const Login = () => {
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
-            })
-                .then(ok => {
-                    if (!ok) {
-                        handleSignOut()
-                            .then(res => {
-                                setLoggedInUser(res)
-                                toast.error('Logged Out!');
-                            })
-                    }
-                });
+            }).then(ok => {
+                if (!ok) {
+                    handleSignOut()
+                        .then(res => {
+                            setLoggedInUser(res)
+                            toast.error('Logged Out!');
+                        })
+                }
+            });
         }
     }
 

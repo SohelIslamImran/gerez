@@ -12,7 +12,6 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import { UserContext } from '../../../App';
-import './PaymentForm.css';
 
 const useOptions = () => {
     const options = useMemo(() => ({

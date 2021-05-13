@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../App';
 import './ServiceDetail.css';
@@ -8,7 +8,7 @@ const ServiceDetail = ({ service }) => {
     const { setSelectedService, isAdmin } = useContext(UserContext);
     const { title, image, description, price } = service;
     return (
-        <div className="col-md-4 mb-5 text-center service-detail">
+        <Col md={4} className="mb-5 text-center service-detail">
             <Card
                 className="border-0 py-4"
                 style={{ maxWidth: '25rem' }}>
@@ -28,7 +28,7 @@ const ServiceDetail = ({ service }) => {
                     </div>
                 </Card.Body>
             </Card>
-        </div>
+        </Col>
     );
 };
 

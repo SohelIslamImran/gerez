@@ -7,7 +7,7 @@ const Login = () => {
     const [show, setShow] = useState(true);
     return (
         <section>
-            <Toast onClose={() => setShow(false)} show={show} delay={10000} autohide>
+            <Toast className="toast-left" onClose={() => setShow(false)} show={show} delay={10000} autohide>
                 <Toast.Header>
                     <img src={infoEmojis} className="rounded mr-2" alt="Info" />
                     <strong className="mr-auto">Important Info</strong>

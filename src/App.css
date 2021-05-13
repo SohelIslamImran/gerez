@@ -7,11 +7,20 @@ p {
   box-shadow: none !important;
 }
 
-.toast {
+.toast-left {
   z-index: 9999;
   position: absolute;
   top: 22rem;
   left: 10rem;
+  right: 0;
+  background-color: white;
+}
+
+.toast-right {
+  z-index: 9999;
+  position: absolute;
+  top: 15rem;
+  left: 90rem;
   right: 0;
   background-color: white;
 }

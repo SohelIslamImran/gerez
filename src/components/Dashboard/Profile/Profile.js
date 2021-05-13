@@ -5,8 +5,7 @@ import { UserContext } from '../../../App';
 import { handleSignOut, initializeLoginFramework } from '../../Login/LoginManager';
 
 const Profile = () => {
-    const { loggedInUser, setLoggedInUser } = useContext(UserContext);
-    const { name, email, photo } = loggedInUser;
+    const { loggedInUser: { name, email, photo }, setLoggedInUser } = useContext(UserContext);
 
     const signOut = () => {
         initializeLoginFramework();

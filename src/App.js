@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, lazy, Suspense, useEffect, useState } from "react";
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import {
   BrowserRouter as Router,
   Route,
@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     axios.get(`https://gerez-server.herokuapp.com/isAdmin?email=${loggedInUser?.email}`)
       .then(res => setIsAdmin(res.data))
-      .catch(error => console.log(error))
+      .catch(error => toast.error(error.message))
   }, [loggedInUser?.email]);
 
   return (
