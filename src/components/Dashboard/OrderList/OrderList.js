@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
+import toast from 'react-hot-toast';
 import TableLoader from '../TableLoader/TableLoader';
 
 const OrderList = () => {
@@ -13,7 +14,7 @@ const OrderList = () => {
                 setOrders(res.data);
                 setLoading(false);
             })
-            .catch(error => console.log(error))
+            .catch(error => toast.error(error.message))
     }, [])
 
     const handleStatusChange = (id, status) => {
@@ -29,8 +30,8 @@ const OrderList = () => {
         const modifiedStatus = { id, status }
 
         axios.patch('https://gerez-server.herokuapp.com/updateOrderStatus', modifiedStatus)
-            .then(res => res.data && console.log(res.data, "Successfully Modified"))
-            .catch(error => console.log(error));
+            .then(res => res.data && toast.success(`Set to ${status}`))
+            .catch(error => toast.error(error.message));
     }
 
     return (

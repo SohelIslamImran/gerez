@@ -1,6 +1,9 @@
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Table } from 'react-bootstrap';
+import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import { UserContext } from '../../../App';
 import TableLoader from '../TableLoader/TableLoader';
@@ -16,20 +19,36 @@ const ManageService = () => {
                 setServices(res.data);
                 setLoading(false);
             })
-            .catch(error => {
-                console.log(error);
-            })
+            .catch(error => toast.error(error.message))
     }, [])
 
     const handleDeleteService = id => {
         if (email === "test@admin.com") {
             return swal("Permission restriction!", "As a test-admin, you don't have this permission.", "info");
         }
-        const removedServices = services.filter(item => item._id !== id);
 
-        axios.delete(`https://gerez-server.herokuapp.com/delete/${id}`)
-            .then(res => res.data && setServices(removedServices))
-            .catch(error => console.log(error))
+        swal({
+            title: "Are you sure?",
+            text: "Are you sure you want to delete this service?",
+            icon: "warning",
+            buttons: [true, "Yes"],
+            dangerMode: true,
+        }).then(wantDelete => {
+            if (wantDelete) {
+                const removedServices = services.filter(item => item._id !== id);
+                axios.delete(`https://gerez-server.herokuapp.com/delete/${id}`)
+                    .then(res => {
+                        if (res.data) {
+                            setServices(removedServices)
+                            return swal("Successfully Deleted!", "Your service has been successfully deleted.", "success");
+                        }
+                        swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
+                    })
+                    .catch(err => swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true }))
+            } else {
+                swal("Don't worry! Your service is safe.");
+            }
+        });
     }
 
     return (
@@ -41,7 +60,7 @@ const ManageService = () => {
                             <th>Service</th>
                             <th>Description</th>
                             <th>Price</th>
-                            <th>Action</th>
+                            <th className="text-center">Action</th>
                         </tr>
                     </thead>
                     {services.map(service => {
@@ -51,20 +70,20 @@ const ManageService = () => {
                                     <td>{service.title}</td>
                                     <td>{service.description.slice(0, 100)}...</td>
                                     <td>${service.price}</td>
-                                    <td>
+                                    <td className="text-center">
                                         <Button
                                             variant="outline-success"
                                             className="p-1 mb-0 shadow-none"
                                         >
-                                            Edit
-                                    </Button>
+                                            <FontAwesomeIcon icon={faEdit} className="mx-1" />Edit
+                                        </Button>
                                         <Button
                                             variant="outline-danger"
-                                            className="p-1 ml-2 mb-0 shadow-none"
+                                            className="p-1 ml-3 mb-0 shadow-none"
                                             onClick={() => handleDeleteService(service._id)}
                                         >
-                                            Delete
-                                    </Button>
+                                            <FontAwesomeIcon icon={faTrash} className="mx-1" />Delete
+                                        </Button>
                                     </td>
                                 </tr>
                             </tbody>

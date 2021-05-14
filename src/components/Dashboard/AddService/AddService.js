@@ -49,9 +49,9 @@ const AddService = () => {
 
     return (
         <section className="add-service">
-            <Form onSubmit={handleSubmit(onSubmit)}>
-                <div className="p-5 mx-md-5 mt-5 bg-white form-main" style={{ borderRadius: "15px", maxWidth: '85rem' }}>
-                    <Form.Row>
+            <Form onSubmit={handleSubmit(onSubmit)} className="w-100">
+                <div className="py-5 mx-auto mt-5 bg-white form-main" style={{ borderRadius: "15px", maxWidth: '85rem' }}>
+                    <Form.Row className="justify-content-center">
                         <Form.Group as={Col} md={5} sm={12} className="mr-md-5">
                             <Form.Label style={{ fontWeight: "bold" }}>Service Title</Form.Label>
                             <Form.Control
@@ -95,11 +95,11 @@ const AddService = () => {
                                 placeholder="Upload photo" />
                         </Form.Group>
                     </Form.Row>
-                </div>
-                <div className="text-right mt-4" style={{ marginRight: "11rem" }}>
-                    <Button type="submit" className="submit-btn btn-main">
-                        Submit
-                    </Button>
+                    <div className="text-center mt-4">
+                        <Button type="submit" className="submit-btn btn-main">
+                            Submit
+                        </Button>
+                    </div>
                 </div>
             </Form>
         </section>
