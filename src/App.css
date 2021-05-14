@@ -19,8 +19,8 @@ p {
 .toast-right {
   z-index: 9999;
   position: absolute;
-  top: 15rem;
-  left: 90rem;
+  top: 13rem;
+  left: 88rem;
   right: 0;
   background-color: white;
 }

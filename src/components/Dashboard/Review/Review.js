@@ -30,11 +30,11 @@ const Review = () => {
     }
 
     return (
-        <section className="d-flex justify-content-center">
+        <section>
             <Form onSubmit={handleSubmit(onSubmit)} className="w-100 form-main">
-                <div className="p-5 mx-auto mt-5 bg-white" style={{ borderRadius: "15px", maxWidth: '85rem' }}>
-                    <Form.Row>
-                        <Form.Group as={Col} md={5} sm={12} className="mr-md-5">
+                <div className="p-5 mx-auto mt-5 bg-white" style={{ borderRadius: "15px", maxWidth: '50rem' }}>
+                    <Form.Row className="justify-content-center px-4">
+                        <Form.Group as={Col} md={12}>
                             <Form.Label style={{ fontWeight: "bold" }}>Your Name</Form.Label>
                             <Form.Control
                                 type="text"
@@ -42,17 +42,17 @@ const Review = () => {
                                 {...register("name", { required: true })}
                                 placeholder="Your Name" />
                         </Form.Group>
-                        <Form.Group as={Col} md={5} sm={12}>
+                        <Form.Group as={Col} md={12}>
                             <Form.Label style={{ fontWeight: "bold" }}>Address</Form.Label>
                             <Form.Control
                                 type="text"
                                 {...register("address", { required: true })}
                                 placeholder="Address" />
                         </Form.Group>
-                        <Form.Group as={Col} md={5} sm={12} className="mr-md-5">
+                        <Form.Group as={Col} md={12}>
                             <Form.Label style={{ fontWeight: "bold" }}>Description</Form.Label>
                             <Form.Control
-                                style={{ height: "9rem" }}
+                                style={{ height: "10rem" }}
                                 type="text"
                                 as="textarea"
                                 {...register("description", { required: true })}

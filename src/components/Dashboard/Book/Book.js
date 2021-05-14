@@ -64,30 +64,32 @@ const Book = () => {
                 </Toast.Body>
             </Toast>
 
-            <section className="d-flex justify-content-center">
-                <Container className="p-5 mx-md-5 mt-5 bg-white" style={{ borderRadius: "15px" }}>
-                    <Row>
-                        <Col md={6} xs={12} className="pr-md-4">
-                            <label style={{ fontWeight: "bold" }}>Service</label>
-                            <Select
-                                onChange={option => setSelectedOption(option)}
-                                defaultValue={defaultOption}
-                                options={options}
-                                styles={colourStyles}
-                            />
-                        </Col>
-                        <Col md={6} xs={12} className="pl-md-4 form-main">
-                            <label style={{ fontWeight: "bold" }}>Price</label>
-                            <div className="form-control w-50 pl-3" style={{ lineHeight: "2", fontWeight: "500" }}>
-                                ${price || selectedOption.price}
-                            </div>
-                        </Col>
-                    </Row>
+            <section>
+                <Container className="p-5 mx-auto mt-5 bg-white" style={{ borderRadius: "15px" }}>
+                    <div className="px-4">
+                        <Row>
+                            <Col md={6} xs={12} className="pr-md-4">
+                                <label style={{ fontWeight: "bold" }}>Service</label>
+                                <Select
+                                    onChange={option => setSelectedOption(option)}
+                                    defaultValue={defaultOption}
+                                    options={options}
+                                    styles={colourStyles}
+                                />
+                            </Col>
+                            <Col md={6} xs={12} className="pl-md-4 form-main">
+                                <label style={{ fontWeight: "bold" }}>Price</label>
+                                <div className="form-control w-50 pl-3" style={{ lineHeight: "2", fontWeight: "500" }}>
+                                    ${price || selectedOption.price}
+                                </div>
+                            </Col>
+                        </Row>
 
-                    <div className="mt-5">
-                        <Elements stripe={stripePromise}>
-                            <PaymentForm serviceInfo={serviceInfo} />
-                        </Elements>
+                        <div className="mt-5">
+                            <Elements stripe={stripePromise}>
+                                <PaymentForm serviceInfo={serviceInfo} />
+                            </Elements>
+                        </div>
                     </div>
                 </Container>
             </section>
