@@ -8,22 +8,27 @@ import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import './AddService.css';
 
-const AddService = () => {
+const AddService = ({ editService, restrictPermission }) => {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = async data => {
+        if (!editService && !data.image[0]) {
+            return toast.error('Please upload an image!');
+        }
         const loading = toast.loading('Uploading...Please wait!');
-        const imageData = new FormData();
-        imageData.set('key', '08d5da1c81cc5c52012f0b930505d031');
-        imageData.append('image', data.image[0]);
+        let imageURL = editService ? editService.image : "";
 
-        let imageURL = "";
-        try {
-            const res = await axios.post('https://api.imgbb.com/1/upload', imageData);
-            imageURL = res.data.data.display_url;
-        } catch (error) {
-            toast.dismiss(loading);
-            return toast.error('Failed to upload the image!');
+        if (!editService || (editService && data.image[0])) {
+            const imageData = new FormData();
+            imageData.set('key', '08d5da1c81cc5c52012f0b930505d031');
+            imageData.append('image', data.image[0]);
+            try {
+                const res = await axios.post('https://api.imgbb.com/1/upload', imageData);
+                imageURL = res.data.data.display_url;
+            } catch (error) {
+                toast.dismiss(loading);
+                return toast.error('Failed to upload the image!');
+            }
         }
 
         const serviceInfo = {
@@ -31,6 +36,26 @@ const AddService = () => {
             description: data.description,
             price: data.price,
             image: imageURL
+        }
+
+        if (editService) {
+            if (restrictPermission(editService._id)) {
+                toast.dismiss(loading);
+                return swal("Permission restriction!", "As a test-admin, you don't have permission to edit 6 core services. But you can edit your added services.", "info");
+            }
+            axios.patch(`http://localhost:5000/update/${editService._id}`, serviceInfo)
+                .then(res => {
+                    toast.dismiss(loading);
+                    if (res.data) {
+                        return swal("Successfully updated", "Your service has been successfully updated!", "success");
+                    }
+                    swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
+                })
+                .catch(error => {
+                    toast.dismiss(loading);
+                    swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
+                });
+            return;
         }
 
         axios.post('https://gerez-server.herokuapp.com/addService', serviceInfo)
@@ -56,6 +81,7 @@ const AddService = () => {
                             <Form.Label style={{ fontWeight: "bold" }}>Service Title</Form.Label>
                             <Form.Control
                                 type="text"
+                                defaultValue={editService ? editService.title : ""}
                                 {...register("title", { required: true })}
                                 placeholder="Enter Title" />
                         </Form.Group>
@@ -63,8 +89,8 @@ const AddService = () => {
                             <Form.Label style={{ fontWeight: "bold" }}>Price</Form.Label>
                             <Form.Control
                                 style={{ maxWidth: "260px" }}
-                                name="price"
                                 type="text"
+                                defaultValue={editService ? editService.price : ""}
                                 {...register("price", { required: true })}
                                 placeholder="Enter Price" />
                         </Form.Group>
@@ -73,12 +99,13 @@ const AddService = () => {
                             <Form.Control
                                 style={{ height: "10rem" }}
                                 type="text"
+                                defaultValue={editService ? editService.description : ""}
                                 as="textarea"
                                 {...register("description", { required: true })}
                                 placeholder="Enter Description" />
                         </Form.Group>
                         <Form.Group as={Col} md={5} sm={12} className="mt-md-3">
-                            <Form.Label style={{ fontWeight: "bold" }}>Add Image</Form.Label>
+                            <Form.Label style={{ fontWeight: "bold" }}>{editService ? "Add New Image" : "Add Image"}</Form.Label>
                             <Button
                                 as={"label"}
                                 htmlFor="upload"
@@ -89,15 +116,14 @@ const AddService = () => {
                             <Form.Control
                                 hidden="hidden"
                                 id="upload"
-                                name="photo"
                                 type="file"
-                                {...register("image", { required: true })}
+                                {...register("image")}
                                 placeholder="Upload photo" />
                         </Form.Group>
                     </Form.Row>
                     <div className="text-center mt-4">
                         <Button type="submit" className="submit-btn btn-main">
-                            Submit
+                            {editService ? "Update" : "Submit"}
                         </Button>
                     </div>
                 </div>

@@ -6,11 +6,13 @@ import { Button, Table } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import { UserContext } from '../../../App';
+import AddService from '../AddService/AddService';
 import TableLoader from '../TableLoader/TableLoader';
 
 const ManageService = () => {
     const { loggedInUser: { email } } = useContext(UserContext);
     const [services, setServices] = useState([]);
+    const [editService, setEditService] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -22,9 +24,23 @@ const ManageService = () => {
             .catch(error => toast.error(error.message))
     }, [])
 
+    const restrictPermission = id => {
+        let matchedID = false;
+        for (let i = 0; i < 6; i++) {
+            const { _id } = services[i];
+            if (id === _id) {
+                matchedID = true;
+            }
+        }
+        if (email === "test@admin.com" && matchedID) {
+            return true;
+        }
+        return false;
+    }
+
     const handleDeleteService = id => {
-        if (email === "test@admin.com") {
-            return swal("Permission restriction!", "As a test-admin, you don't have this permission.", "info");
+        if (restrictPermission(id)) {
+            return swal("Permission restriction!", "As a test-admin, you don't have permission to delete 6 core services. But you can delete your added services.", "info");
         }
 
         swal({
@@ -45,52 +61,52 @@ const ManageService = () => {
                         swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
                     })
                     .catch(err => swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true }))
-            } else {
-                swal("Don't worry! Your service is safe.");
             }
         });
     }
 
     return (
-        <div className="px-5 pt-4 mx-md-4 mt-5 bg-white" style={{ borderRadius: "15px" }}>
-            {loading ? <TableLoader />
-                : <Table hover borderless responsive>
-                    <thead className="bg-light">
-                        <tr>
-                            <th>Service</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th className="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    {services.map(service => {
-                        return (
-                            <tbody key={service._id} style={{ fontWeight: "500" }}>
-                                <tr>
-                                    <td>{service.title}</td>
-                                    <td>{service.description.slice(0, 100)}...</td>
-                                    <td>${service.price}</td>
-                                    <td className="text-center">
-                                        <Button
-                                            variant="outline-success"
-                                            className="p-1 mb-0 shadow-none"
-                                        >
-                                            <FontAwesomeIcon icon={faEdit} className="mx-1" />Edit
-                                        </Button>
-                                        <Button
-                                            variant="outline-danger"
-                                            className="p-1 ml-3 mb-0 shadow-none"
-                                            onClick={() => handleDeleteService(service._id)}
-                                        >
-                                            <FontAwesomeIcon icon={faTrash} className="mx-1" />Delete
-                                        </Button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        )
-                    })}
-                </Table>}
-        </div>
+        editService._id ? <AddService editService={editService} restrictPermission={restrictPermission} /> :
+            <div className="px-5 pt-4 mx-md-4 mt-5 bg-white" style={{ borderRadius: "15px" }}>
+                {loading ? <TableLoader />
+                    : <Table hover borderless responsive>
+                        <thead className="bg-light">
+                            <tr>
+                                <th>Service</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th className="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        {services.map(service => {
+                            return (
+                                <tbody key={service._id} style={{ fontWeight: "500" }}>
+                                    <tr>
+                                        <td>{service.title}</td>
+                                        <td>{service.description.slice(0, 100)}...</td>
+                                        <td>${service.price}</td>
+                                        <td className="text-center">
+                                            <Button
+                                                variant="outline-success"
+                                                className="p-1 mb-0"
+                                                onClick={() => setEditService(service)}
+                                            >
+                                                <FontAwesomeIcon icon={faEdit} className="mx-1" />Edit
+                                            </Button>
+                                            <Button
+                                                variant="outline-danger"
+                                                className="p-1 ml-3 mb-0"
+                                                onClick={() => handleDeleteService(service._id)}
+                                            >
+                                                <FontAwesomeIcon icon={faTrash} className="mx-1" />Delete
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            )
+                        })}
+                    </Table>}
+            </div>
     );
 };
 

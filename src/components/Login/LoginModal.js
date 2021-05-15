@@ -88,7 +88,7 @@ const Login = () => {
                 ),
                 icon: "warning",
                 buttons: true,
-                dangerMode: true,
+                dangerMode: true
             }).then(ok => {
                 if (!ok) {
                     handleSignOut()

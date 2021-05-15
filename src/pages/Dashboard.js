@@ -1,4 +1,6 @@
-import React, { useContext, useState } from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../App';
 import AddService from '../components/Dashboard/AddService/AddService';
@@ -10,13 +12,39 @@ import MakeAdmin from '../components/Dashboard/MakeAdmin/MakeAdmin';
 import ManageService from '../components/Dashboard/ManageService/ManageService';
 import OrderList from '../components/Dashboard/OrderList/OrderList';
 import Profile from '../components/Dashboard/Profile/Profile';
-import Review from '../components/Dashboard/Review/Review';
+import AddReview from '../components/Dashboard/Review/AddReview';
+import Review, { EditReview } from '../components/Dashboard/Review/Review';
+import ReviewLoader from '../components/Dashboard/Review/ReviewLoader';
 import Sidebar from '../components/Dashboard/Sidebar/Sidebar';
 
 const Dashboard = () => {
-    const { isAdmin } = useContext(UserContext);
+    const { loggedInUser: { email }, isAdmin } = useContext(UserContext);
     const { panel } = useParams();
+    //const history = useHistory();
     const [showSidebar, setShowSidebar] = useState(false);
+    const [loadingReview, setLoadingReview] = useState(true);
+    const [review, setReview] = useState({});
+    const [reviewEdit, setReviewEdit] = useState(false);
+
+    /*     if (
+            !isAdmin && (
+                panel === "orderList" ||
+                panel === "addService" ||
+                panel === "makeAdmin" ||
+                panel === "manageServices")
+        ) {
+            history.replace({ pathname: "/dashboard/profile" });
+        } */
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/reviews?email=${email}`)
+            .then(res => {
+                setReview(res.data);
+                setLoadingReview(false);
+            })
+            .catch(error => toast.error(error.message))
+    }, [email, reviewEdit, review])
+
     return (
         <div className="wrapper">
             <Sidebar show={showSidebar} />
@@ -29,8 +57,11 @@ const Dashboard = () => {
                                 : panel === "manageServices" && isAdmin ? <ManageService />
                                     : panel === "book" ? <Book />
                                         : panel === "bookingList" ? <BookingList />
-                                            : panel === "review" ? <Review />
-                                                : null}
+                                            : panel === "review" && loadingReview ? <ReviewLoader />
+                                                : panel === "review" && review.name && !reviewEdit ? <Review review={review} setEdit={setReviewEdit} />
+                                                    : panel === "review" && reviewEdit ? <EditReview review={review} edit={reviewEdit} setEdit={setReviewEdit} />
+                                                        : panel === "review" ? <AddReview setReview={setReview} />
+                                                            : null}
             </div>
         </div>
     );
