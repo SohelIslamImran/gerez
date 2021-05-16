@@ -22,7 +22,7 @@ const Profile = () => {
                 <Card.Header as={"h4"} className="text-center border-0 mt-1">Profile</Card.Header>
                 <Card.Body className="card-body">
                     <div className="d-flex flex-column align-items-center text-center">
-                        <img src={photo} alt="Admin" class="rounded-circle" width="150" />
+                        <img src={photo} alt="Admin" className="rounded-circle" width="150" />
                         <div className="mt-3">
                             <h4>{name}</h4>
                             <p className="text-secondary mb-1">{email}</p>
