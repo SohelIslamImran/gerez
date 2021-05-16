@@ -19,6 +19,7 @@ const ProfilePopper = () => {
     return (
         <OverlayTrigger
             trigger="click"
+            rootClose
             key="bottom"
             placement="bottom"
             overlay={
