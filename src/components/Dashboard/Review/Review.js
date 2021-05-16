@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
+import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import '../../Home/Testimonials/Testimonials.css';
 import AddReview from './AddReview';
@@ -17,14 +18,19 @@ const Review = ({ review: { name, description, address, img, _id }, setEdit }) =
             dangerMode: true,
         }).then(wantDelete => {
             if (wantDelete) {
-                axios.delete(`http://localhost:5000/deleteReview/${id}`)
+                const loading = toast.loading('Deleting...Please wait!');
+                axios.delete(`https://gerez-server.herokuapp.com/deleteReview/${id}`)
                     .then(res => {
+                        toast.dismiss(loading);
                         if (res.data) {
                             return swal("Successfully Deleted!", "Your review has been successfully deleted.", "success");
                         }
                         swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
                     })
-                    .catch(err => swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true }))
+                    .catch(err => {
+                        toast.dismiss(loading);
+                        swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true })
+                    })
             }
         });
     }

@@ -16,7 +16,7 @@ const AddReview = ({ review, setReview, edit, setEdit }) => {
         data.email = email;
 
         if (edit) {
-            axios.patch(`http://localhost:5000/updateReview/${review._id}`, data)
+            axios.patch(`https://gerez-server.herokuapp.com/updateReview/${review._id}`, data)
                 .then(res => {
                     toast.dismiss(loading);
                     if (

@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import './AddService.css';
 
-const AddService = ({ editService, restrictPermission }) => {
+const AddService = ({ editService, restrictPermission, setEditService }) => {
     const { register, handleSubmit } = useForm();
 
     const onSubmit = async data => {
@@ -41,18 +41,32 @@ const AddService = ({ editService, restrictPermission }) => {
         if (editService) {
             if (restrictPermission(editService._id)) {
                 toast.dismiss(loading);
+                setEditService({});
                 return swal("Permission restriction!", "As a test-admin, you don't have permission to edit 6 core services. But you can edit your added services.", "info");
             }
-            axios.patch(`http://localhost:5000/update/${editService._id}`, serviceInfo)
+            if (
+                data.title === editService.title &&
+                data.price === editService.price &&
+                imageURL === editService.image &&
+                data.description === editService.description
+            ) {
+                toast.dismiss(loading);
+                setEditService({});
+                return toast.error("You haven't changed anything!");
+            }
+            axios.patch(`https://gerez-server.herokuapp.com/update/${editService._id}`, serviceInfo)
                 .then(res => {
                     toast.dismiss(loading);
                     if (res.data) {
+                        setEditService(serviceInfo);
                         return swal("Successfully updated", "Your service has been successfully updated!", "success");
                     }
+                    setEditService({});
                     swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
                 })
                 .catch(error => {
                     toast.dismiss(loading);
+                    setEditService({});
                     swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
                 });
             return;

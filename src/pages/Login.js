@@ -13,9 +13,7 @@ const Login = () => {
                     <strong className="mr-auto">Important Info</strong>
                 </Toast.Header>
                 <Toast.Body className="text-center">
-                    Sign in as an admin to test the admin panel
-                    <br />
-                    Or login with a different account as a user
+                    Use this account to <br /> Sign in as an admin to test the admin panel <br /> Or login with a different account as a user.
                 </Toast.Body>
             </Toast>
             <LoginModal />

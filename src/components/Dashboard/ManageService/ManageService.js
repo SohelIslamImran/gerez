@@ -22,7 +22,7 @@ const ManageService = () => {
                 setLoading(false);
             })
             .catch(error => toast.error(error.message))
-    }, [])
+    }, [editService])
 
     const restrictPermission = id => {
         let matchedID = false;
@@ -51,22 +51,27 @@ const ManageService = () => {
             dangerMode: true,
         }).then(wantDelete => {
             if (wantDelete) {
+                const loading = toast.loading('Deleting...Please wait!');
                 const removedServices = services.filter(item => item._id !== id);
                 axios.delete(`https://gerez-server.herokuapp.com/delete/${id}`)
                     .then(res => {
+                        toast.dismiss(loading);
                         if (res.data) {
                             setServices(removedServices)
                             return swal("Successfully Deleted!", "Your service has been successfully deleted.", "success");
                         }
                         swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
                     })
-                    .catch(err => swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true }))
+                    .catch(err => {
+                        toast.dismiss(loading);
+                        swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true })
+                    })
             }
         });
     }
 
     return (
-        editService._id ? <AddService editService={editService} restrictPermission={restrictPermission} /> :
+        editService._id ? <AddService editService={editService} setEditService={setEditService} restrictPermission={restrictPermission} /> :
             <div className="px-5 pt-4 mx-md-4 mt-5 bg-white" style={{ borderRadius: "15px" }}>
                 {loading ? <TableLoader />
                     : <Table hover borderless responsive>

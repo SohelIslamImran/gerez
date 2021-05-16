@@ -1,8 +1,7 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const Testimonial = ({ testimonial }) => {
-    const { name, address, img, description } = testimonial;
+const Testimonial = ({ testimonial: { name, address, img, description } }) => {
     return (
         <Card className="my-4">
             <Card.Img variant="top" src={img} width="60" />

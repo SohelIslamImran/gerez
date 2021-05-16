@@ -1,21 +1,23 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import toast from 'react-hot-toast';
+import { UserContext } from '../../../App';
 import TableLoader from '../TableLoader/TableLoader';
 
 const OrderList = () => {
+    const { loggedInUser: { email } } = useContext(UserContext);
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('https://gerez-server.herokuapp.com/orders')
+        axios.get(`https://gerez-server.herokuapp.com/orders?email=${email}`)
             .then(res => {
                 setOrders(res.data);
                 setLoading(false);
             })
             .catch(error => toast.error(error.message))
-    }, [])
+    }, [email])
 
     const handleStatusChange = (id, status) => {
         let modifiedOrders = [];

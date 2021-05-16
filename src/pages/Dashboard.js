@@ -37,7 +37,7 @@ const Dashboard = () => {
         } */
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/reviews?email=${email}`)
+        axios.get(`https://gerez-server.herokuapp.com/reviews?email=${email}`)
             .then(res => {
                 setReview(res.data);
                 setLoadingReview(false);
