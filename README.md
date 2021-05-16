@@ -25,5 +25,5 @@
 
 <hr/>
 
-**[Back-end Repository](https://github.com/Porgramming-Hero-web-course/complete-website-server-SohelIslamImran)**
+**[Back-end Repository](https://github.com/SohelIslamImran/gerez-server)**
 <hr/>
