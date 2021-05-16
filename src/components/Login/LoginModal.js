@@ -19,6 +19,7 @@ const Login = () => {
     const { setLoggedInUser } = useContext(UserContext);
     const [showModal, setShowModal] = useState(false);
     const [newUser, setNewUser] = useState(false);
+    
     const { register: registerSignIn, handleSubmit: handleSignIn } = useForm();
     const { register: registerSignUp, handleSubmit: handleSignUp } = useForm();
 

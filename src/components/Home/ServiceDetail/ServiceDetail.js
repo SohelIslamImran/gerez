@@ -26,7 +26,7 @@ const ServiceDetail = ({ service }) => {
                                 to={isAdmin ? "/dashboard/orderList" : "/dashboard/book"}
                                 onClick={() => setSelectedService(service)}>
                                 Book Now
-                        </Button>
+                            </Button>
                         </div>
                     </Card.Body>
                 </Card>

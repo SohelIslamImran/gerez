@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { Button, Image, Nav, OverlayTrigger, Popover } from 'react-bootstrap';
-import { handleSignOut, initializeLoginFramework } from '../../Login/LoginManager';
 import toast from 'react-hot-toast';
 import { UserContext } from '../../../App';
+import { handleSignOut, initializeLoginFramework } from '../../Login/LoginManager';
 
 const ProfilePopper = () => {
-    const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+    const { loggedInUser: { name, email, photo }, setLoggedInUser } = useContext(UserContext);
 
     const signOut = () => {
         initializeLoginFramework();
@@ -24,11 +24,11 @@ const ProfilePopper = () => {
             overlay={
                 <Popover id="popover-positioned-bottom">
                     <div className="d-flex justify-content-center mt-1">
-                        <Image style={{ maxWidth: "60px" }} src={loggedInUser.photo} roundedCircle />
+                        <Image style={{ maxWidth: "60px" }} src={photo} roundedCircle />
                     </div>
                     <Popover.Content>
-                        <strong className="text-center d-block">{loggedInUser.name}</strong>
-                        <strong className="text-center d-block">{loggedInUser.email}</strong>
+                        <strong className="text-center d-block">{name}</strong>
+                        <strong className="text-center d-block">{email}</strong>
                         <div className="d-flex justify-content-center mt-1">
                             <Button onClick={signOut}
                                 variant="outline-danger"
@@ -41,7 +41,7 @@ const ProfilePopper = () => {
         >
             <Nav.Link className="p-0">
                 <Image
-                    src={loggedInUser.photo}
+                    src={photo}
                     width="40"
                     height="40"
                     roundedCircle

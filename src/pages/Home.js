@@ -9,7 +9,7 @@ import Testimonials from '../components/Home/Testimonials/Testimonials';
 
 const Home = () => {
     return (
-        <section>
+        <main>
             <Header />
             <About />
             <Services />
@@ -17,7 +17,7 @@ const Home = () => {
             <Testimonials />
             <Contact />
             <Footer />
-        </section>
+        </main>
     );
 };
 

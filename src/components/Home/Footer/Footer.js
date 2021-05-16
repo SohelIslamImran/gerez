@@ -186,7 +186,7 @@ const Footer = () => {
                 </Container>
             </div>
             <div className="back-to-top">
-                <Button variant="dark" onClick={scrollHandler} title="Back to Top" className={scrolled && "d-block"}>
+                <Button variant="dark" onClick={scrollHandler} title="Back to Top" className={scrolled ? "d-block" : "d-none"}>
                     <FontAwesomeIcon icon={faAngleUp} />
                 </Button>
             </div>

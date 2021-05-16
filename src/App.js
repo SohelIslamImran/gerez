@@ -19,11 +19,15 @@ export const UserContext = createContext();
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(getDecodedUser());
   const [selectedService, setSelectedService] = useState([]);
+  const [adminLoading, setAdminLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     axios.get(`https://gerez-server.herokuapp.com/isAdmin?email=${loggedInUser?.email}`)
-      .then(res => setIsAdmin(res.data))
+      .then(res => {
+        setIsAdmin(res.data);
+        setAdminLoading(false);
+      })
       .catch(error => toast.error(error.message))
   }, [loggedInUser?.email]);
 
@@ -37,7 +41,7 @@ function App() {
               <Home />
             </Route>
             <PrivateRoute path="/dashboard/:panel">
-              <Dashboard />
+              <Dashboard adminLoading={adminLoading} />
             </PrivateRoute>
             <Route path="/login">
               <Login />

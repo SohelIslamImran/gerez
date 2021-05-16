@@ -12,7 +12,7 @@ const Banner = () => {
                         <h1>We Make Car <br /> Repair Hassle Free</h1>
                         <p className="text-muted my-4 pr-md-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the</p>
                         <Button
-                            className="shadow-none btn-main"
+                            className="btn-main"
                             href="#services">
                             Get Started
                         </Button>

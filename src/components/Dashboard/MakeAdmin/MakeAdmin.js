@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext } from 'react';
 import { Button, Col, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
 import swal from 'sweetalert';
 import { UserContext } from '../../../App';
 import './MakeAdmin.css';
@@ -14,9 +15,19 @@ const MakeAdmin = () => {
         if (email === "test@admin.com") {
             return swal("Permission restriction!", "As a test-admin, you don't have this permission.", "info");;
         }
+        const loading = toast.loading('Adding...Please wait!');
         axios.post('https://gerez-server.herokuapp.com/addAdmin', data)
-            .then(res => res.data && swal("Successfully Added", `${data.email} has been successfully added as an admin.`, "success"))
-            .catch(error => swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true }));
+            .then(res => {
+                toast.dismiss(loading);
+                if (res.data) {
+                    return swal("Successfully Added", `${data.email} has been successfully added as an admin.`, "success");
+                }
+                swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true });
+            })
+            .catch(error => {
+                toast.dismiss(loading);
+                swal("Failed!", "Something went wrong! Please try again.", "error", { dangerMode: true })
+            });
     }
 
     return (
