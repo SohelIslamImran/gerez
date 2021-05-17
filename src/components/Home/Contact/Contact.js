@@ -28,7 +28,7 @@ const Contact = () => {
 
     return (
         <section id="contact" className="contact-section">
-            <Fade bottom duration={3000} distance="40px">
+            <Fade bottom duration={2500} distance="40px">
                 <Container>
                     <div className="text-center">
                         <h1>contact us</h1>

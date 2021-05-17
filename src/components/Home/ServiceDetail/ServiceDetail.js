@@ -10,7 +10,7 @@ const ServiceDetail = ({ service }) => {
     const { title, image, description, price } = service;
     return (
         <Col md={4} className="mb-5 text-center service-detail">
-            <Fade bottom duration={3000} distance="40px">
+            <Fade bottom duration={2500} distance="40px">
                 <Card
                     className="border-0 py-4"
                     style={{ maxWidth: '25rem' }}>

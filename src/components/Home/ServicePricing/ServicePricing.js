@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Nav, Row, Tab } from 'react-bootstrap';
+import { Col, Container, Nav, Row, Spinner, Tab } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 import Fade from 'react-reveal/Fade';
 import battery from '../../../images/battery.svg';
@@ -13,17 +13,21 @@ import PricingItem from '../PricingItem/PricingItem';
 import './ServicePricing.css';
 
 const ServicePricing = () => {
+    const [loading, setLoading] = useState(true);
     const [services, setServices] = useState([]);
 
     useEffect(() => {
         axios.get('https://gerez-server.herokuapp.com/services')
-            .then(res => setServices(res.data))
+            .then(res => {
+                setServices(res.data);
+                setLoading(false);
+            })
             .catch(error => toast.error(error.message))
     }, [])
 
     return (
         <section className="pricing-section" id="pricing">
-            <Fade bottom duration={3000} distance="40px">
+            <Fade bottom duration={2500} distance="40px">
                 <Container className="my-md-5">
                     <Col xs={12}>
                         <div className="pricing-title text-center">
@@ -68,7 +72,11 @@ const ServicePricing = () => {
                                 </Nav>
                                 <Tab.Content>
                                     {
-                                        services.map((data, idx) => <PricingItem key={idx} id={idx} data={data} />)
+                                        loading ?
+                                            <div className="text-center">
+                                                <Spinner animation="border" variant="danger" />
+                                            </div>
+                                            : services.map((data, idx) => <PricingItem key={idx} id={idx} data={data} />)
                                     }
                                 </Tab.Content>
                             </Tab.Container>

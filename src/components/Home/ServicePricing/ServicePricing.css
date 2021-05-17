@@ -4,6 +4,10 @@
   background: #f8f8f8;
 }
 
+.pricing-section a {
+  text-decoration: none;
+}
+
 .pricing-title > span {
   font-size: 1rem;
   color: #ed5217;
