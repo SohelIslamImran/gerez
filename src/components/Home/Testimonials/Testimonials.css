@@ -75,6 +75,7 @@
   background: #fff;
   box-shadow: 0 8px 30px -7px #c9dff0;
   margin: 0 20px;
+  min-height: 340px;
   padding: 0 10px;
   border-radius: 20px;
   border: 0;
