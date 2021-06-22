@@ -7,6 +7,7 @@ import AddService from '../components/Dashboard/AddService/AddService';
 import Book from '../components/Dashboard/Book/Book';
 import BookingList from '../components/Dashboard/BookingList/BookingList';
 import '../components/Dashboard/Dashboard.css';
+import DashboardLoader from '../components/Dashboard/DashboardLoader';
 import DashboardNavbar from '../components/Dashboard/DashboardNavbar/DashboardNavbar';
 import MakeAdmin from '../components/Dashboard/MakeAdmin/MakeAdmin';
 import ManageService from '../components/Dashboard/ManageService/ManageService';
@@ -36,6 +37,15 @@ const Dashboard = ({ adminLoading }) => {
         history.replace({ pathname: "/dashboard/profile" });
     }
 
+    if (
+        !adminLoading && isAdmin && (
+            panel === "book" ||
+            panel === "bookingList" ||
+            panel === "review")
+    ) {
+        history.replace({ pathname: "/dashboard/profile" });
+    }
+
     useEffect(() => {
         axios.get(`https://gerez-server.herokuapp.com/reviews?email=${email}`)
             .then(res => {
@@ -51,7 +61,8 @@ const Dashboard = ({ adminLoading }) => {
             <div id="content">
                 <DashboardNavbar setShowSidebar={setShowSidebar} show={showSidebar} />
                 {
-                    panel === "profile" ? <Profile />
+                    adminLoading ? <DashboardLoader />
+                    : panel === "profile" ? <Profile />
                     : panel === "orderList" && isAdmin ? <OrderList />
                     : panel === "addService" && isAdmin ? <AddService />
                     : panel === "makeAdmin" && isAdmin ? <MakeAdmin />
