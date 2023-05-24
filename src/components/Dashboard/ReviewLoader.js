@@ -1,6 +1,6 @@
 import ContentLoader from "react-content-loader";
 
-const DashboardLoader = (props) => {
+const ReviewLoader = (props) => {
     return (
         <ContentLoader
             width="100%"
@@ -17,4 +17,4 @@ const DashboardLoader = (props) => {
     );
 };
 
-export default DashboardLoader;
+export default ReviewLoader;
